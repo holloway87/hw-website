@@ -1,0 +1,23 @@
+// Booststrap functions and variables
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+
+$primary: #1DAF99;//#4B9682;
+$secondary: #277BB0;
+$success: #17BD46;
+$info: #FC9B12;
+$danger: #B02727;
+
+$theme-colors: (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger,
+    "light":      $light,
+    "dark":       $dark
+);
+
+$body-bg: #1F2E2B;
+$body-color: $white;

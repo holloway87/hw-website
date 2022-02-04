@@ -5,7 +5,7 @@
         <p>Listed below are some of my illustrations, comics or silly doodles.</p>
 
         <b-row>
-            <b-col sm="4">
+            <b-col sm="6" md="4">
                 <LinkCard
                     description="One panel comic strips about my ghost Abe."
                     image="/images/art_the_life_of_abe.png"

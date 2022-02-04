@@ -5,7 +5,7 @@
         <p>Choose a category:</p>
 
         <b-row>
-            <b-col sm="4">
+            <b-col sm="6" md="4">
                 <LinkCard
                     description="Have a look at my illustrations."
                     image="/images/home_art.png"
@@ -13,7 +13,7 @@
                     url="/illustrations"
                 />
             </b-col>
-            <b-col sm="4">
+            <b-col sm="6" md="4">
                 <LinkCard
                     description="I sometimes like to take photos."
                     image="/images/home_photos.png"
@@ -21,7 +21,7 @@
                     url="/photos"
                 />
             </b-col>
-            <b-col sm="4">
+            <b-col sm="6" md="4">
                 <LinkCard
                     description="These are some of my programming projects."
                     image="/images/home_dev.png"

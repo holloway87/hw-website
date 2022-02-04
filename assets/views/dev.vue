@@ -1,5 +1,9 @@
 <template>
-    <div>Programming</div>
+    <div>
+        <h1>Programming</h1>
+
+        <p>Nothing to see here yet.</p>
+    </div>
 </template>
 
 <script>

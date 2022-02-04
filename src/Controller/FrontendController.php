@@ -21,6 +21,7 @@ class FrontendController extends AbstractController
     #[Route('/', name: 'frontend_home')]
     #[Route('/illustrations', name: 'frontend_art')]
     #[Route('/illustrations/the-life-of-abe', name: 'frontend_art_the_life_of_abe')]
+    #[Route('/illustrations/maaya-community-doodles', name: 'frontend_art_maaya_community_doodles')]
     #[Route('/dev', name: 'frontend_programming')]
     #[Route('/photos', name: 'frontend_photos')]
     public function vue(): Response

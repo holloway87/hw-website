@@ -19,5 +19,8 @@ $theme-colors: (
     "dark":       $dark
 );
 
+$link-color: $primary;
+$link-hover-color: darken($link-color, 15%);
+
 $body-bg: #1F2E2B;
 $body-color: $white;

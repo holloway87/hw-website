@@ -1,4 +1,6 @@
 /.idea/
+/public/art/
+!/public/art/.gitkeep
 /composer.phar
 
 ###> symfony/framework-bundle ###

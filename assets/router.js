@@ -12,9 +12,14 @@ const router = new VueRouter({
             'component': () => import(/* webpackChunkName: "home" */'./views/home'),
         },
         {
-            'path': '/art',
+            'path': '/illustrations',
             'name': 'Art',
             'component': () => import(/* webpackChunkName: "art" */'./views/art'),
+        },
+        {
+            'path': '/illustrations/the-life-of-abe',
+            'name': 'The Life of Abe',
+            'component': () => import(/* webpackChunkName: "art-the-life-of-abe" */'./views/art-the-life-of-abe'),
         },
         {
             'path': '/photos',

@@ -10,7 +10,7 @@
                     description="Have a look at my illustrations."
                     image="/images/home_art.png"
                     title="Art"
-                    url="/art"
+                    url="/illustrations"
                 />
             </b-col>
             <b-col sm="4">

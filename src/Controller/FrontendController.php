@@ -23,7 +23,8 @@ class FrontendController extends AbstractController
     #[Route('/illustrations/the-life-of-abe', name: 'frontend_art_the_life_of_abe')]
     #[Route('/illustrations/maaya-community-doodles', name: 'frontend_art_maaya_community_doodles')]
     #[Route('/dev', name: 'frontend_programming')]
-    #[Route('/photos', name: 'frontend_photos')]
+    #[Route('/photo-projects', name: 'frontend_photos')]
+    #[Route('/photo-projects/macro', name: 'frontend_photos_macro')]
     public function vue(): Response
     {
         return $this->render('frontend/vue.html.twig');

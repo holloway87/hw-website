@@ -18,7 +18,7 @@
                     description="I sometimes like to take photos."
                     image="/images/home_photos.png"
                     title="Photos"
-                    url="/photos"
+                    url="/photo-projects"
                 />
             </b-col>
             <b-col sm="6" md="4">

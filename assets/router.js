@@ -27,9 +27,14 @@ const router = new VueRouter({
             'component': () => import(/* webpackChunkName: "art-the-life-of-abe" */'./views/art-the-life-of-abe'),
         },
         {
-            'path': '/photos',
+            'path': '/photo-projects',
             'name': 'Photos',
             'component': () => import(/* webpackChunkName: "photos" */'./views/photos'),
+        },
+        {
+            'path': '/photo-projects/macro',
+            'name': 'Macro photos',
+            'component': () => import(/* webpackChunkName: "photos-macro" */'./views/photos-macro'),
         },
         {
             'path': '/dev',

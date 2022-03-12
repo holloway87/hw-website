@@ -13,6 +13,14 @@
                     url="/photo-projects/macro"
                 />
             </b-col>
+            <b-col sm="6" md="4">
+                <LinkCard
+                    description="Photos of those squishy things in the sky."
+                    image="/images/home_photos.png"
+                    title="Cloud photos"
+                    url="/photo-projects/clouds"
+                />
+            </b-col>
         </b-row>
     </div>
 </template>

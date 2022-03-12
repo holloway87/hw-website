@@ -30,6 +30,8 @@ export default {
         request.send((data) => {
             let response = JSON.parse(data.responseText);
             if ('object' !== typeof response || !response.success) {
+                this.files = [];
+
                 return;
             }
 

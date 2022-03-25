@@ -21,6 +21,14 @@
                     url="/photo-projects/clouds"
                 />
             </b-col>
+            <b-col sm="6" md="4">
+                <LinkCard
+                    description="Photos of my cat Mia."
+                    image="/images/photos_mia.png"
+                    title="My cat Mia"
+                    url="/photo-projects/mia"
+                />
+            </b-col>
         </b-row>
     </div>
 </template>

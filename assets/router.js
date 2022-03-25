@@ -42,6 +42,11 @@ const router = new VueRouter({
             'component': () => import(/* webpackChunkName: "photos-macro" */'./views/photos-macro'),
         },
         {
+            'path': '/photo-projects/mia',
+            'name': 'My cat Mia',
+            'component': () => import(/* webpackChunkName: "photos-macro" */'./views/photos-mia'),
+        },
+        {
             'path': '/dev',
             'name': 'Programming',
             'component': () => import(/* webpackChunkName: "dev" */'./views/dev'),

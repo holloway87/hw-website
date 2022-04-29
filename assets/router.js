@@ -32,6 +32,11 @@ const router = new VueRouter({
             'component': () => import(/* webpackChunkName: "photos" */'./views/photos'),
         },
         {
+            'path': '/photo-projects/bw-analog',
+            'name': 'Cloud photos',
+            'component': () => import(/* webpackChunkName: "photos-clouds" */'./views/photos-bw-analog'),
+        },
+        {
             'path': '/photo-projects/clouds',
             'name': 'Cloud photos',
             'component': () => import(/* webpackChunkName: "photos-clouds" */'./views/photos-clouds'),

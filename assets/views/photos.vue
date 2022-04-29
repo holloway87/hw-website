@@ -15,6 +15,14 @@
             </b-col>
             <b-col sm="6" md="4">
                 <LinkCard
+                    description="Black and white analog photos."
+                    image="/images/photos_bw_analog.png"
+                    title="B/W analog"
+                    url="/photo-projects/bw-analog"
+                />
+            </b-col>
+            <b-col sm="6" md="4">
+                <LinkCard
                     description="Photos of those squishy things in the sky."
                     image="/images/home_photos.png"
                     title="Cloud photos"

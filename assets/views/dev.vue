@@ -18,13 +18,19 @@
                 </b-card>
             </b-col>
         </b-row>
+
+        <div class="text-center mb-4">
+            <ButtonBack url="/" />
+        </div>
     </div>
 </template>
 
 <script>
 import { BIconGithub } from 'bootstrap-vue';
 
+import ButtonBack from "../components/button-back";
+
 export default {
-    components: { BIconGithub },
+    components: { ButtonBack, BIconGithub },
 };
 </script>

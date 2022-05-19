@@ -12,13 +12,18 @@
             no_images_message="There are currently no doodles."
             title="Maaya's community doodles"
         />
+
+        <div class="text-center mb-4">
+            <ButtonBack url="/illustrations" />
+        </div>
     </div>
 </template>
 
 <script>
+import ButtonBack from '../components/button-back';
 import ImagesPager from '../components/images-pager';
 
 export default {
-    components: { ImagesPager },
+    components: { ButtonBack, ImagesPager },
 };
 </script>

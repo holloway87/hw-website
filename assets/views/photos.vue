@@ -38,13 +38,18 @@
                 />
             </b-col>
         </b-row>
+
+        <div class="text-center mb-4">
+            <ButtonBack url="/" />
+        </div>
     </div>
 </template>
 
 <script>
+import ButtonBack from '../components/button-back';
 import LinkCard from '../components/link-card';
 
 export default {
-    components: { LinkCard },
+    components: { ButtonBack, LinkCard },
 };
 </script>

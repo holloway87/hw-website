@@ -6,7 +6,7 @@
 
         <b-row>
             <b-col sm="6" md="4">
-                <b-card title="My website">
+                <b-card class="mb-4" title="My website">
                     <b-card-text>The code to this website can be found on my github.</b-card-text>
 
                     <b-button

@@ -1,8 +1,8 @@
 <template>
     <div>
-        <h1>Cloud photos</h1>
-
-        <p>I can't see enough of clouds, especially from above.</p>
+        <PageHeader title="Cloud photos">
+            I can't see enough of clouds, especially from above.
+        </PageHeader>
 
         <PhotosGallery project="clouds" />
 
@@ -14,9 +14,10 @@
 
 <script>
 import ButtonBack from '../components/button-back';
+import PageHeader from '../components/page-header';
 import PhotosGallery from '../components/photos-gallery';
 
 export default {
-    components: { ButtonBack, PhotosGallery }
+    components: { ButtonBack, PageHeader, PhotosGallery }
 };
 </script>

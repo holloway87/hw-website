@@ -1,8 +1,8 @@
 <template>
     <div>
-        <h1>Macro photos</h1>
-
-        <p>I love magnifying the little things, here are some photos I took with a macro lens.</p>
+        <PageHeader title="Macro photos">
+            I love magnifying the little things, here are some photos I took with a macro lens.
+        </PageHeader>
 
         <PhotosGallery project="macro" />
 
@@ -14,9 +14,10 @@
 
 <script>
 import ButtonBack from '../components/button-back';
+import PageHeader from '../components/page-header';
 import PhotosGallery from '../components/photos-gallery';
 
 export default {
-    components: { ButtonBack, PhotosGallery }
+    components: { ButtonBack, PageHeader, PhotosGallery }
 };
 </script>

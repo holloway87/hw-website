@@ -1,0 +1,20 @@
+<template>
+    <div class="page-header">
+        <h1 class="text-white text-3xl mb-4">{{ title }}</h1>
+
+        <p class="text-white mb-2">
+            <slot />
+        </p>
+    </div>
+</template>
+
+<script>
+export default {
+    props: {
+        'title': {
+            'required': true,
+            'type': String,
+        },
+    },
+};
+</script>

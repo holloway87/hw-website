@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <h1>B/W analog</h1>
-
-        <p>I recently got an analog camera and want to try out black and white photos.</p>
+    <div class="page-photos-bw-analog">
+        <PageHeader title="B/W analog">
+            I recently got an analog camera and want to try out black and white photos.
+        </PageHeader>
 
         <PhotosGallery project="bw_analog" />
 
@@ -14,9 +14,10 @@
 
 <script>
 import ButtonBack from '../components/button-back';
+import PageHeader from '../components/page-header';
 import PhotosGallery from '../components/photos-gallery';
 
 export default {
-    components: { ButtonBack, PhotosGallery }
+    components: { ButtonBack, PageHeader, PhotosGallery }
 };
 </script>

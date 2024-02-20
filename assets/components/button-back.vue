@@ -1,15 +1,16 @@
 <template>
-    <router-link class="btn btn-primary btn-back" :to="url">
-        <b-icon-arrow-left-square />
+    <ButtonLink :url="url">
+        <b-icon-arrow-left-square class="inline-block align-text-top text-xl mr-1" />
         back
-    </router-link>
+    </ButtonLink>
 </template>
 
 <script>
 import { BIconArrowLeftSquare } from 'bootstrap-vue';
+import ButtonLink from './button-link';
 
 export default {
-    components: { BIconArrowLeftSquare },
+    components: { BIconArrowLeftSquare, ButtonLink },
     props: {
         'url': {
             'required': true,
@@ -18,9 +19,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-.btn-back {
-    line-height: 1;
-}
-</style>

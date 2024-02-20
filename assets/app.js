@@ -4,7 +4,7 @@ import BootstrapVue from 'bootstrap-vue';
 import router from './router';
 
 import App from './App';
-import './styles/app.scss';
+import './styles/app.css';
 
 Vue.use(BootstrapVue);
 

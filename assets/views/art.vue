@@ -1,27 +1,25 @@
 <template>
-    <div>
-        <h1>Art</h1>
+    <div class="page-art">
+        <PageHeader title="Art">
+            Listed below are some of my illustrations, comics or silly doodles.
+        </PageHeader>
 
-        <p>Listed below are some of my illustrations, comics or silly doodles.</p>
-
-        <b-row>
-            <b-col sm="6" md="4">
-                <LinkCard
-                    description="One panel comic strips about my ghost Abe."
-                    image="/images/art_the_life_of_abe.png"
-                    title="The Life of Abe"
-                    url="/illustrations/the-life-of-abe"
-                />
-            </b-col>
-            <b-col sm="6" md="4">
-                <LinkCard
-                    description="Silly doodles about Maaya's community."
-                    image="/images/art_maaya_community_doodles.png"
-                    title="Maaya's community doodles"
-                    url="/illustrations/maaya-community-doodles"
-                />
-            </b-col>
-        </b-row>
+        <CardsContainer>
+            <CardImageLink
+                class="mb-5"
+                description="One panel comic strips about my ghost Abe."
+                image="/images/art_the_life_of_abe.png"
+                title="The Life of Abe"
+                url="/illustrations/the-life-of-abe"
+            />
+            <CardImageLink
+                class="mb-5"
+                description="Silly doodles about Maaya's community."
+                image="/images/art_maaya_community_doodles.png"
+                title="Maaya's community doodles"
+                url="/illustrations/maaya-community-doodles"
+            />
+        </CardsContainer>
 
         <div class="text-center mb-4">
             <ButtonBack url="/" />
@@ -31,9 +29,11 @@
 
 <script>
 import ButtonBack from '../components/button-back';
-import LinkCard from '../components/link-card';
+import CardImageLink from '../components/card-image-link';
+import CardsContainer from '../components/cards-container';
+import PageHeader from '../components/page-header';
 
 export default {
-    components: { ButtonBack, LinkCard },
+    components: { ButtonBack, CardImageLink, CardsContainer, PageHeader },
 };
 </script>

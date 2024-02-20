@@ -1,43 +1,39 @@
 <template>
-    <div>
+    <div class="images-pager mb-5">
         <p v-if="null === image_files">Loading...</p>
         <p v-if="null !== image_files && !image_files.length">{{ no_images_message }}</p>
 
         <div v-if="null !== image_files && image_files.length">
-            <b-row>
-                <b-col sm="8" offset-sm="2">
-                    <img :src="image_files[current_image]" class="img-fluid mx-auto mb-4 d-block" :alt="title">
-                </b-col>
-                <b-col cols="6">
-                    <p class="text-center">
-                        <b-button
-                            variant="primary"
-                            v-if="0 < current_image"
+            <div class="grid grid-cols-2">
+                <div class="col-span-2 md:max-w-[75%] mx-auto">
+                    <img :src="image_files[current_image]" class="mx-auto mb-4" :alt="title">
+                </div>
+                <div>
+                    <p v-if="0 < current_image" class="text-center">
+                        <ButtonText
                             v-on:click="eventPreviousImage"
-                        ><b-icon-chevron-left /></b-button>
+                        ><b-icon-chevron-left /></ButtonText>
                     </p>
-                </b-col>
-                <b-col cols="6">
-                    <p class="text-center">
-                        <b-button
-                            variant="primary"
-                            v-if="current_image < image_files.length -1"
+                </div>
+                <div>
+                    <p v-if="current_image < image_files.length -1" class="text-center">
+                        <ButtonText
                             v-on:click="eventNextImage"
-                        ><b-icon-chevron-right /></b-button>
+                        ><b-icon-chevron-right /></ButtonText>
                     </p>
-                </b-col>
-            </b-row>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import { BIconChevronLeft, BIconChevronRight } from 'bootstrap-vue';
-
 import { AjaxRequest } from '../lib/ajax-request';
+import { BIconChevronLeft, BIconChevronRight } from 'bootstrap-vue';
+import ButtonText from './button-text';
 
 export default {
-    components: { BIconChevronLeft, BIconChevronRight },
+    components: { BIconChevronLeft, BIconChevronRight, ButtonText },
     data() {
         return {
             'current_image': null,

@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <h1>The Life of Abe</h1>
-
-        <p>These comic strips are about my ghost character Abe, who will be depicted in various actions.</p>
+    <div class="page-art-the-life-of-abe">
+        <PageHeader title="The Life of Abe">
+            These comic strips are about my ghost character Abe, who will be depicted in various actions.
+        </PageHeader>
 
         <ImagesPager
             images_data_url="/illustrations/the-life-of-abe/get-image-files"
@@ -19,8 +19,9 @@
 <script>
 import ButtonBack from '../components/button-back';
 import ImagesPager from '../components/images-pager';
+import PageHeader from '../components/page-header';
 
 export default {
-    components: { ButtonBack, ImagesPager },
+    components: { ButtonBack, ImagesPager, PageHeader },
 };
 </script>

@@ -1,8 +1,6 @@
 <template>
     <div>
-        <h1>My cat Mia</h1>
-
-        <p>I love her.</p>
+        <PageHeader title="My cat Mia">I love her.</PageHeader>
 
         <PhotosGallery project="mia" />
 
@@ -13,10 +11,11 @@
 </template>
 
 <script>
-import PhotosGallery from '../components/photos-gallery';
 import ButtonBack from '../components/button-back';
+import PageHeader from '../components/page-header';
+import PhotosGallery from '../components/photos-gallery';
 
 export default {
-    components: { ButtonBack, PhotosGallery }
+    components: { ButtonBack, PageHeader, PhotosGallery }
 };
 </script>

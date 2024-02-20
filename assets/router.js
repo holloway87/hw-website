@@ -33,8 +33,8 @@ const router = new VueRouter({
         },
         {
             'path': '/photo-projects/bw-analog',
-            'name': 'Cloud photos',
-            'component': () => import(/* webpackChunkName: "photos-clouds" */'./views/photos-bw-analog'),
+            'name': 'Black & White analog photos',
+            'component': () => import(/* webpackChunkName: "photos-analog" */'./views/photos-bw-analog'),
         },
         {
             'path': '/photo-projects/clouds',

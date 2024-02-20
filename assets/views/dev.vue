@@ -6,14 +6,14 @@
 
         <CardsContainer>
             <Card class="mb-5" title="My website" description="The code to this website can be found on my github.">
-                <ButtonLink
+                <ButtonLinkExternal
                     url="https://github.com/holloway87/hw-website"
                     rel="nofollow"
                     target="_blank"
                 >
                     <b-icon-github class="inline-block align-text-top text-xl mr-1" />
                     GitHub source
-                </ButtonLink>
+                </ButtonLinkExternal>
             </Card>
         </CardsContainer>
 
@@ -26,12 +26,12 @@
 <script>
 import { BIconGithub } from 'bootstrap-vue';
 import ButtonBack from '../components/button-back';
-import ButtonLink from '../components/button-link';
+import ButtonLinkExternal from '../components/button-link-external';
 import Card from '../components/card';
 import CardsContainer from '../components/cards-container';
 import PageHeader from '../components/page-header';
 
 export default {
-    components: { BIconGithub, ButtonBack, ButtonLink, Card, CardsContainer, PageHeader },
+    components: { BIconGithub, ButtonBack, ButtonLinkExternal, Card, CardsContainer, PageHeader },
 };
 </script>

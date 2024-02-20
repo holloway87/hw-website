@@ -4,7 +4,7 @@
             I recently got an analog camera and want to try out black and white photos.
         </PageHeader>
 
-        <PhotosGallery project="bw_analog" />
+        <ProjectPhotosGallery project="bw_analog" class="mb-5" />
 
         <div class="text-center mb-4">
             <ButtonBack url="/photo-projects" />
@@ -15,9 +15,9 @@
 <script>
 import ButtonBack from '../components/button-back';
 import PageHeader from '../components/page-header';
-import PhotosGallery from '../components/photos-gallery';
+import ProjectPhotosGallery from '../components/project-photos-gallery';
 
 export default {
-    components: { ButtonBack, PageHeader, PhotosGallery }
+    components: { ButtonBack, PageHeader, ProjectPhotosGallery }
 };
 </script>

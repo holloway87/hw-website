@@ -1,4 +1,6 @@
 /.idea/
+/data/timeline/
+!/data/timeline/.gitkeep
 /public/art/
 !/public/art/.gitkeep
 /public/photos/

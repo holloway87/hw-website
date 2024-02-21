@@ -10,16 +10,16 @@ namespace App\Entity;
 class TimelineEntriesRequest
 {
     /**
-     * Maximum amount of entries to retrieve.
-     */
-    private int $limit = 0;
-
-    /**
      * Retrieved entries.
      *
      * @var TimelineEntry[]
      */
     private array $entries = [];
+
+    /**
+     * Maximum amount of entries to retrieve.
+     */
+    private int $limit = 0;
 
     /**
      * Return all retrieved entries.

@@ -42,6 +42,7 @@ class TimelineController extends AbstractController
 
             foreach ($entries_request->getEntries() as $entry) {
                 $data['entries'][] = [
+                    'id' => $entry->getId(),
                     'date' => $entry->getDate()?->format('d.m.y'),
                     'time' => $entry->getDate()?->format('H:i'),
                     'title' => $entry->getTitle(),

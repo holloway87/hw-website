@@ -61,6 +61,11 @@ const router = new VueRouter({
             'name': 'Programming',
             'component': () => import(/* webpackChunkName: "dev" */'./views/dev'),
         },
+        {
+            'path': '/timeline/:id',
+            'name': 'Timeline',
+            'component': () => import(/* webpackChunkName: "timeline-entry" */'./views/timeline-entry'),
+        },
     ],
 });
 

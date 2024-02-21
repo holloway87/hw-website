@@ -31,6 +31,7 @@
         <TimelineEntry
             v-for="entry in this.timeline_entries"
             :key="entry.date + entry.time"
+            :id="entry.id"
             :title="entry.title"
             :images="entry.images"
             :date="entry.date"

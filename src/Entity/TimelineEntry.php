@@ -20,6 +20,11 @@ class TimelineEntry
     private ?\DateTime $date = null;
 
     /**
+     * Timeline ID.
+     */
+    private ?string $id = null;
+
+    /**
      * Images.
      *
      * @var TimelineEntryImage[]
@@ -49,6 +54,16 @@ class TimelineEntry
     public function getDate(): ?\DateTime
     {
         return $this->date;
+    }
+
+    /**
+     * Return the timeline ID.
+     *
+     * @return string|null
+     */
+    public function getId(): ?string
+    {
+        return $this->id;
     }
 
     /**
@@ -93,6 +108,19 @@ class TimelineEntry
     public function setDate(?\DateTime $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Set the timeline ID.
+     *
+     * @param string|null $id
+     * @return self
+     */
+    public function setId(?string $id): self
+    {
+        $this->id = $id;
 
         return $this;
     }

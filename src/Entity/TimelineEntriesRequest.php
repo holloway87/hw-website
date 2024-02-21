@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Request data to retrieve timeline entries.
  *
@@ -17,9 +19,16 @@ class TimelineEntriesRequest
     private array $entries = [];
 
     /**
+     * Timeline ID.
+     */
+    #[Assert\Regex(pattern: '/^\d{8}-\d{4}$/', message: 'Enter a valid timeline id.')]
+    private ?string $id = null;
+
+    /**
      * Maximum amount of entries to retrieve.
      */
-    private int $limit = 0;
+    #[Assert\PositiveOrZero(message: 'Enter a valid positive limit.')]
+    private ?int $limit = 0;
 
     /**
      * Return all retrieved entries.
@@ -32,11 +41,19 @@ class TimelineEntriesRequest
     }
 
     /**
+     * Return a timeline ID.
+     */
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+
+    /**
      * Return the maximum amount of entries to retrieve.
      *
-     * @return int
+     * @return int|null
      */
-    public function getLimit(): int
+    public function getLimit(): ?int
     {
         return $this->limit;
     }
@@ -55,12 +72,25 @@ class TimelineEntriesRequest
     }
 
     /**
-     * Set the maximum amount of entries to retrieve.
+     * Set a timeline ID.
      *
-     * @param int $limit
+     * @param string|null $id
      * @return self
      */
-    public function setLimit(int $limit): self
+    public function setId(?string $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Set the maximum amount of entries to retrieve.
+     *
+     * @param int|null $limit
+     * @return self
+     */
+    public function setLimit(?int $limit): self
     {
         $this->limit = $limit;
 

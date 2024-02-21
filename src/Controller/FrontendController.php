@@ -29,6 +29,7 @@ class FrontendController extends AbstractController
     #[Route('/photo-projects/clouds', name: 'frontend_photos_clouds')]
     #[Route('/photo-projects/macro', name: 'frontend_photos_macro')]
     #[Route('/photo-projects/mia', name: 'frontend_photos_mia')]
+    #[Route('/timeline/{id}', name: 'frontend_timeline_entry', requirements: ['id' => '\d{8}-\d{4}'])]
     public function vue(): Response
     {
         return $this->render('frontend/vue.html.twig');

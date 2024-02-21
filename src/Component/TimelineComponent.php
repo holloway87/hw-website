@@ -41,14 +41,15 @@ class TimelineComponent
             $data['date'] = new \DateTime(sprintf('%d-%d-%d %d:%d:00', $match[1], $match[2], $match[3],
                 $match[4], $match[5]));
 
-            $timeline_entries[$data['date']->format('YmdHi')] = $data;
+            $timeline_entries[$data['date']->format('Ymd-Hi')] = $data;
         }
         $dir->close();
         krsort($timeline_entries);
 
         $entries = [];
-        foreach ($timeline_entries as $data) {
-            $entries[] = (new TimelineEntry())
+        foreach ($timeline_entries as $key => $data) {
+            $entry = (new TimelineEntry())
+                ->setId($key)
                 ->setDate($data['date'])
                 ->setTitle(array_key_exists('title', $data) ? $data['title'] : null)
                 ->setContent(array_key_exists('content', $data) ? $data['content'] : null)
@@ -64,7 +65,16 @@ class TimelineComponent
                     return $entry_image;
                 }, array_key_exists('images', $data) ? $data['images'] : []));
 
-            if ($request->getLimit() && $request->getLimit() == count($entries)) {
+            if ($request->getId()) {
+                if ($request->getId() == $key) {
+                    $entries = [$entry];
+                    break;
+                }
+            } else {
+                $entries[] = $entry;
+            }
+
+            if (!$request->getId() && $request->getLimit() && $request->getLimit() == count($entries)) {
                 break;
             }
         }

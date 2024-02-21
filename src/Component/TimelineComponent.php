@@ -27,8 +27,7 @@ class TimelineComponent
      */
     public function retrieveEntries(TimelineEntriesRequest $request): void
     {
-        $entries = [];
-
+        $timeline_entries = [];
         $dir = dir(self::TIMELINE_PATH);
         while ($file = $dir->read()) {
             if (!preg_match('/^(\d{4})(\d{2})(\d{2})-(\d{2})(\d{2})\.json$/', $file, $match)) {
@@ -39,10 +38,18 @@ class TimelineComponent
             if (!is_array($data)) {
                 continue;
             }
+            $data['date'] = new \DateTime(sprintf('%d-%d-%d %d:%d:00', $match[1], $match[2], $match[3],
+                $match[4], $match[5]));
 
+            $timeline_entries[$data['date']->format('YmdHi')] = $data;
+        }
+        $dir->close();
+        krsort($timeline_entries);
+
+        $entries = [];
+        foreach ($timeline_entries as $data) {
             $entries[] = (new TimelineEntry())
-                ->setDate(new \DateTime(sprintf('%d-%d-%d %d:%d:00', $match[1], $match[2], $match[3], $match[4],
-                    $match[5])))
+                ->setDate($data['date'])
                 ->setTitle(array_key_exists('title', $data) ? $data['title'] : null)
                 ->setContent(array_key_exists('content', $data) ? $data['content'] : null)
                 ->setImages(array_map(function (string $image) {
@@ -61,7 +68,6 @@ class TimelineComponent
                 break;
             }
         }
-        $dir->close();
 
         $request->setEntries($entries);
     }

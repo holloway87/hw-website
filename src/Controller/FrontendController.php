@@ -24,6 +24,7 @@ class FrontendController extends AbstractController
     #[Route('/illustrations/maaya-community-doodles', name: 'frontend_art_maaya_community_doodles')]
     #[Route('/dev', name: 'frontend_programming')]
     #[Route('/photo-projects', name: 'frontend_photos')]
+    #[Route('/photo-projects/analog', name: 'frontend_photos_analog')]
     #[Route('/photo-projects/bw-analog', name: 'frontend_photos_bw_analog')]
     #[Route('/photo-projects/clouds', name: 'frontend_photos_clouds')]
     #[Route('/photo-projects/macro', name: 'frontend_photos_macro')]

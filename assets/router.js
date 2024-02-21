@@ -32,9 +32,14 @@ const router = new VueRouter({
             'component': () => import(/* webpackChunkName: "photos" */'./views/photos'),
         },
         {
+            'path': '/photo-projects/analog',
+            'name': 'Analog photos',
+            'component': () => import(/* webpackChunkName: "photos-analog" */'./views/photos-analog'),
+        },
+        {
             'path': '/photo-projects/bw-analog',
             'name': 'Black & White analog photos',
-            'component': () => import(/* webpackChunkName: "photos-analog" */'./views/photos-bw-analog'),
+            'component': () => import(/* webpackChunkName: "photos-bw-analog" */'./views/photos-bw-analog'),
         },
         {
             'path': '/photo-projects/clouds',

@@ -14,6 +14,13 @@
             />
             <CardImageLink
                 class="mb-5"
+                description="Color analog photos."
+                image="/images/photos_analog.png"
+                title="Analog"
+                url="/photo-projects/analog"
+            />
+            <CardImageLink
+                class="mb-5"
                 description="Black and white analog photos."
                 image="/images/photos_bw_analog.png"
                 title="B/W analog"

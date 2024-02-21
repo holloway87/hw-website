@@ -1,5 +1,7 @@
 <template>
-    <div class="timeline-entry">
+    <div class="page-timeline-entry">
+        <PageHeader title="Timeline entry" class="text-center" />
+
         <p v-if="!timeline_entry" class="text-white text-center mb-4">Loading...</p>
         <TimelineEntry
             v-if="timeline_entry"
@@ -13,18 +15,19 @@
         </TimelineEntry>
 
         <div class="text-center mb-4">
-            <ButtonBack url="/" />
+            <ButtonBack url="/timeline" />
         </div>
     </div>
 </template>
 
 <script>
 import { AjaxRequest } from '../lib/ajax-request';
+import ButtonBack from '../components/button-back';
+import PageHeader from '../components/page-header';
 import TimelineEntry from '../components/timeline-entry';
-import ButtonBack from "../components/button-back.vue";
 
 export default {
-    components: {ButtonBack, TimelineEntry },
+    components: { ButtonBack, PageHeader, TimelineEntry },
     data() {
         return {
             'timeline_entry': null

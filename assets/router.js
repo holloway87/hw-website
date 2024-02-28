@@ -68,7 +68,7 @@ const router = new VueRouter({
         },
         {
             'path': '/timeline/:id',
-            'name': 'Timeline',
+            'name': 'Timeline Entry',
             'component': () => import(/* webpackChunkName: "timeline-entry" */'./views/timeline-entry'),
         },
     ],

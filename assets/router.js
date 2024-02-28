@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import useDefaultStore from './store';
 
 const router = new createRouter({
     'history': createWebHistory(),
@@ -64,6 +65,14 @@ const router = new createRouter({
             'component': () => import(/* webpackChunkName: "timeline" */'./views/timeline'),
         },
         {
+            'path': '/timeline-admin',
+            'name': 'Timeline Admin',
+            'component': () => import(/* webpackChunkName: "timeline-admin" */'./views/timeline-admin'),
+            'meta': {
+                'auth': true
+            },
+        },
+        {
             'path': '/timeline/:id',
             'name': 'Timeline Entry',
             'component': () => import(/* webpackChunkName: "timeline-entry" */'./views/timeline-entry'),
@@ -74,6 +83,16 @@ const router = new createRouter({
             'component': () => import(/* webpackChunkName: "admin-login" */'./views/admin-login'),
         },
     ],
+});
+
+router.beforeEach((to, from, next) => {
+    const store = useDefaultStore();
+
+    if (to.meta.auth && !store.logged_in) {
+        next('/admin-login');
+    } else {
+        next();
+    }
 });
 
 export default router;

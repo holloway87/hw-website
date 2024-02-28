@@ -57,7 +57,7 @@ function checkCodeInput(event) {
         error_message.value = '';
     }
 }
-function submitLogin(event) {
+function submitLogin() {
     let request = new AjaxRequest('POST', '/admin-login', {'code': code.value});
     request.send((data) => {
         let response = JSON.parse(data.responseText);
@@ -71,7 +71,8 @@ function submitLogin(event) {
             return;
         }
 
-        router.push('/');
+        store.setLoggedIn(true);
+        router.push('/timeline-admin');
     });
 }
 </script>

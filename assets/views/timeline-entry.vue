@@ -15,41 +15,40 @@
         </TimelineEntry>
 
         <div class="text-center mb-4">
-            <ButtonBack url="/timeline" />
+            <ButtonBack :url="store.back_url" />
         </div>
     </div>
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { AjaxRequest } from '../lib/ajax-request';
 import ButtonBack from '../components/button-back';
 import PageHeader from '../components/page-header';
 import TimelineEntry from '../components/timeline-entry';
-</script>
+import useDefaultStore from '../store';
 
-<script>
-import { AjaxRequest } from '../lib/ajax-request';
+const route = useRoute();
+const store = useDefaultStore();
+const timeline_entry = ref(null);
 
-export default {
-    data() {
-        return {
-            'timeline_entry': null
-        };
-    },
-    mounted() {
-        let data = new FormData();
-        data.append('id', this.$route.params.id);
+onMounted(() => {
+    let data = new FormData();
+    data.append('id', route.params.id);
 
-        let request = new AjaxRequest('POST', '/timeline/entries', data);
-        request.send((data) => {
-            let response = JSON.parse(data.responseText);
-            if ('object' !== typeof response || !response.success) {
-                return;
-            }
+    let request = new AjaxRequest('POST', '/timeline/entries', data);
+    request.send((data) => {
+        let response = JSON.parse(data.responseText);
+        if ('object' !== typeof response || !response.success) {
+            return;
+        }
 
-            if (1 === response.entries.length) {
-                this.timeline_entry = response.entries[0];
-            }
-        });
-    },
-};
+        if (1 === response.entries.length) {
+            timeline_entry.value = response.entries[0];
+        }
+    });
+
+    store.setBackUrl('/timeline');
+});
 </script>

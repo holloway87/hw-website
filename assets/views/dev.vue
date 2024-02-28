@@ -18,16 +18,24 @@
         </CardsContainer>
 
         <div class="text-center mb-4">
-            <ButtonBack url="/" />
+            <ButtonBack :url="store.back_url" />
         </div>
     </div>
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import ButtonBack from '../components/button-back';
 import ButtonLinkExternal from '../components/button-link-external';
 import { CodeBracketIcon } from '@heroicons/vue/24/outline';
 import Card from '../components/card';
 import CardsContainer from '../components/cards-container';
 import PageHeader from '../components/page-header';
+import useDefaultStore from '../store';
+
+const store = useDefaultStore();
+
+onMounted(() => {
+    store.setBackUrl('/');
+});
 </script>

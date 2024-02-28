@@ -34,47 +34,44 @@
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { AjaxRequest } from '../lib/ajax-request';
 import ButtonText from '../components/button-text';
 import PageHeader from '../components/page-header';
-</script>
+import useDefaultStore from '../store';
 
-<script>
-import { AjaxRequest } from '../lib/ajax-request';
+const code = ref('');
+const error_message = ref('');
+const router = useRouter();
+const store = useDefaultStore();
 
-export default {
-    data() {
-        return {
-            'code': '',
-            'error_message': ''
-        };
-    },
-    methods: {
-        checkCodeInput(event) {
-            if ("Enter" === event.key) {
-                this.submitLogin();
-            }
+onMounted(() => store.setBackUrl('/'));
 
-            if (this.error_message) {
-                this.error_message = '';
-            }
-        },
-        submitLogin() {
-            let request = new AjaxRequest('POST', '/admin-login', {'code': this.code});
-            request.send((data) => {
-                let response = JSON.parse(data.responseText);
-                if (401 === data.status && response.message) {
-                    this.error_message = response.message;
+function checkCodeInput(event) {
+    if ("Enter" === event.key) {
+        submitLogin();
+    }
 
-                    return;
-                }
+    if (error_message.value) {
+        error_message.value = '';
+    }
+}
+function submitLogin(event) {
+    let request = new AjaxRequest('POST', '/admin-login', {'code': code.value});
+    request.send((data) => {
+        let response = JSON.parse(data.responseText);
+        if (401 === data.status && response.message) {
+            error_message.value = response.message;
 
-                if (!response.success) {
-                    return;
-                }
+            return;
+        }
 
-                this.$router.push('/');
-            });
-        },
-    },
-};
+        if (!response.success) {
+            return;
+        }
+
+        router.push('/');
+    });
+}
 </script>

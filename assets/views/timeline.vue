@@ -17,39 +17,36 @@
         </TimelineEntry>
 
         <div class="text-center mb-4">
-            <ButtonBack url="/" />
+            <ButtonBack :url="store.back_url" />
         </div>
     </div>
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue';
+import { AjaxRequest } from '../lib/ajax-request';
 import ButtonBack from '../components/button-back';
 import PageHeader from '../components/page-header';
 import TimelineEntry from '../components/timeline-entry';
-</script>
+import useDefaultStore from '../store';
 
-<script>
-import { AjaxRequest } from '../lib/ajax-request';
+const store = useDefaultStore();
+const timeline_entries = ref([]);
 
-export default {
-    data() {
-        return {
-            'timeline_entries': []
-        };
-    },
-    mounted() {
-        let data = new FormData();
-        data.append('limit', '0');
+onMounted(() => {
+    let data = new FormData();
+    data.append('limit', '0');
 
-        let request = new AjaxRequest('POST', '/timeline/entries', data);
-        request.send((data) => {
-            let response = JSON.parse(data.responseText);
-            if ('object' !== typeof response) {
-                return;
-            }
+    let request = new AjaxRequest('POST', '/timeline/entries', data);
+    request.send((data) => {
+        let response = JSON.parse(data.responseText);
+        if ('object' !== typeof response) {
+            return;
+        }
 
-            this.timeline_entries = response.entries;
-        });
-    },
-};
+        timeline_entries.value = response.entries;
+    });
+
+    store.setBackUrl('/');
+});
 </script>

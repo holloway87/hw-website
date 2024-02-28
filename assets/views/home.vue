@@ -52,36 +52,33 @@
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue';
+import { AjaxRequest } from '../lib/ajax-request';
 import ButtonLink from '../components/button-link';
 import { CalendarIcon } from '@heroicons/vue/24/outline';
 import CardImageLink from '../components/card-image-link';
 import CardsContainer from '../components/cards-container';
 import PageHeader from '../components/page-header';
 import TimelineEntry from '../components/timeline-entry';
-</script>
+import useDefaultStore from '../store';
 
-<script>
-import { AjaxRequest } from '../lib/ajax-request';
+const store = useDefaultStore();
+const timeline_entries = ref([]);
 
-export default {
-    data() {
-        return {
-            'timeline_entries': []
-        };
-    },
-    mounted() {
-        let data = new FormData();
-        data.append('limit', '5');
+onMounted(() => {
+    let data = new FormData();
+    data.append('limit', '5');
 
-        let request = new AjaxRequest('POST', '/timeline/entries', data);
-        request.send((data) => {
-            let response = JSON.parse(data.responseText);
-            if ('object' !== typeof response) {
-                return;
-            }
+    let request = new AjaxRequest('POST', '/timeline/entries', data);
+    request.send((data) => {
+        let response = JSON.parse(data.responseText);
+        if ('object' !== typeof response) {
+            return;
+        }
 
-            this.timeline_entries = response.entries;
-        });
-    },
-};
+        timeline_entries.value = response.entries;
+    });
+
+    store.setBackUrl('');
+});
 </script>

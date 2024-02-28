@@ -11,13 +11,21 @@
         />
 
         <div class="text-center mb-4">
-            <ButtonBack url="/illustrations" />
+            <ButtonBack :url="store.back_url" />
         </div>
     </div>
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import ButtonBack from '../components/button-back';
 import ImagesPager from '../components/images-pager';
 import PageHeader from '../components/page-header';
+import useDefaultStore from '../store';
+
+const store = useDefaultStore();
+
+onMounted(() => {
+    store.setBackUrl('/illustrations');
+});
 </script>

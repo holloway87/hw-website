@@ -11,7 +11,7 @@
                     rel="nofollow"
                     target="_blank"
                 >
-                    <b-icon-github class="inline-block align-text-top text-xl mr-1" />
+                    <CodeBracketIcon class="h-6 inline-block align-bottom mr-1" />
                     GitHub source
                 </ButtonLinkExternal>
             </Card>
@@ -23,15 +23,11 @@
     </div>
 </template>
 
-<script>
-import { BIconGithub } from 'bootstrap-vue';
+<script setup>
 import ButtonBack from '../components/button-back';
 import ButtonLinkExternal from '../components/button-link-external';
+import { CodeBracketIcon } from '@heroicons/vue/24/outline';
 import Card from '../components/card';
 import CardsContainer from '../components/cards-container';
 import PageHeader from '../components/page-header';
-
-export default {
-    components: { BIconGithub, ButtonBack, ButtonLinkExternal, Card, CardsContainer, PageHeader },
-};
 </script>

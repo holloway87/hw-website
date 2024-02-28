@@ -20,14 +20,16 @@
     </div>
 </template>
 
-<script>
-import { AjaxRequest } from '../lib/ajax-request';
+<script setup>
 import ButtonBack from '../components/button-back';
 import PageHeader from '../components/page-header';
 import TimelineEntry from '../components/timeline-entry';
+</script>
+
+<script>
+import { AjaxRequest } from '../lib/ajax-request';
 
 export default {
-    components: { ButtonBack, PageHeader, TimelineEntry },
     data() {
         return {
             'timeline_entry': null

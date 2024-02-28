@@ -5,7 +5,7 @@
         <p v-if="!timeline_entries.length" class="text-white text-center mb-4">Loading...</p>
 
         <TimelineEntry
-            v-for="entry in this.timeline_entries"
+            v-for="entry in timeline_entries"
             :key="entry.date + entry.time"
             :id="entry.id"
             :title="entry.title"
@@ -22,14 +22,16 @@
     </div>
 </template>
 
-<script>
-import { AjaxRequest } from '../lib/ajax-request';
+<script setup>
 import ButtonBack from '../components/button-back';
 import PageHeader from '../components/page-header';
 import TimelineEntry from '../components/timeline-entry';
+</script>
+
+<script>
+import { AjaxRequest } from '../lib/ajax-request';
 
 export default {
-    components: { ButtonBack, PageHeader, TimelineEntry },
     data() {
         return {
             'timeline_entries': []

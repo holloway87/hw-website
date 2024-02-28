@@ -6,39 +6,33 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { onMounted, ref } from 'vue';
 import { AjaxRequest } from '../lib/ajax-request';
 import PhotosGallery from './photos-gallery';
-import VuePictureSwipe from 'vue-picture-swipe';
 
-export default {
-    components: { PhotosGallery, VuePictureSwipe },
-    data() {
-        return {
-            'files': [],
-        };
+const files = ref([]);
+const props = defineProps({
+    'project': {
+        'required': true,
+        'type': String,
     },
-    mounted() {
-        let data = new FormData();
-        data.append('project', this.project);
+});
 
-        let request = new AjaxRequest('POST', '/photos/get-files', data);
-        request.send((data) => {
-            let response = JSON.parse(data.responseText);
-            if ('object' !== typeof response || !response.success) {
-                this.files = [];
+onMounted(() => {
+    let data = new FormData();
+    data.append('project', props.project);
 
-                return;
-            }
+    let request = new AjaxRequest('POST', '/photos/get-files', data);
+    request.send((data) => {
+        let response = JSON.parse(data.responseText);
+        if ('object' !== typeof response || !response.success) {
+            files.value = [];
 
-            this.files = response.files;
-        });
-    },
-    props: {
-        'project': {
-            'required': true,
-            'type': String,
-        },
-    },
-};
+            return;
+        }
+
+        files.value = response.files;
+    });
+});
 </script>

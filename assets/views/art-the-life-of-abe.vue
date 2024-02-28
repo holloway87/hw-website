@@ -16,12 +16,8 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import ButtonBack from '../components/button-back';
 import ImagesPager from '../components/images-pager';
 import PageHeader from '../components/page-header';
-
-export default {
-    components: { ButtonBack, ImagesPager, PageHeader },
-};
 </script>

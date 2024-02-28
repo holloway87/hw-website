@@ -1,21 +1,18 @@
 <template>
     <ButtonLink :url="url">
-        <b-icon-arrow-left-square class="inline-block align-text-top text-xl mr-1" />
+        <ChevronLeftIcon class="h-6 inline-block align-bottom" />
         back
     </ButtonLink>
 </template>
 
-<script>
-import { BIconArrowLeftSquare } from 'bootstrap-vue';
+<script setup>
+import { ChevronLeftIcon } from '@heroicons/vue/24/outline';
 import ButtonLink from './button-link';
 
-export default {
-    components: { BIconArrowLeftSquare, ButtonLink },
-    props: {
-        'url': {
-            'required': true,
-            'type': String,
-        },
+defineProps({
+    'url': {
+        'required': true,
+        'type': String,
     },
-};
+});
 </script>

@@ -31,14 +31,14 @@
         <div class="flex flex-col sm:flex-row sm:justify-center gap-4 w-full mb-4">
             <div class="sm:text-right">
                 <ButtonLink url="/timeline">
-                    <b-icon-calendar class="inline-block align-text-top text-xl mr-1" /> Show timeline
+                    <CalendarIcon class="h-6 inline-block align-bottom" /> Show timeline
                 </ButtonLink>
             </div>
             <p class="text-white my-auto">Recent posts:</p>
         </div>
 
         <TimelineEntry
-            v-for="entry in this.timeline_entries"
+            v-for="entry in timeline_entries"
             :key="entry.date + entry.time"
             :id="entry.id"
             :title="entry.title"
@@ -51,17 +51,19 @@
     </div>
 </template>
 
-<script>
-import { AjaxRequest } from '../lib/ajax-request';
-import { BIconCalendar } from 'bootstrap-vue';
+<script setup>
 import ButtonLink from '../components/button-link';
+import { CalendarIcon } from '@heroicons/vue/24/outline';
 import CardImageLink from '../components/card-image-link';
 import CardsContainer from '../components/cards-container';
 import PageHeader from '../components/page-header';
 import TimelineEntry from '../components/timeline-entry';
+</script>
+
+<script>
+import { AjaxRequest } from '../lib/ajax-request';
 
 export default {
-    components: { BIconCalendar, ButtonLink, CardImageLink ,CardsContainer, PageHeader, TimelineEntry },
     data() {
         return {
             'timeline_entries': []

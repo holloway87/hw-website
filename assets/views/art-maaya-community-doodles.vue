@@ -17,12 +17,8 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import ButtonBack from '../components/button-back';
 import ImagesPager from '../components/images-pager';
-import PageHeader from "../components/page-header.vue";
-
-export default {
-    components: {PageHeader, ButtonBack, ImagesPager },
-};
+import PageHeader from '../components/page-header';
 </script>

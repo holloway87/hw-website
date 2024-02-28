@@ -48,13 +48,9 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import ButtonBack from '../components/button-back';
 import CardImageLink from '../components/card-image-link';
 import CardsContainer from '../components/cards-container';
 import PageHeader from '../components/page-header';
-
-export default {
-    components: { ButtonBack, CardImageLink, CardsContainer, PageHeader },
-};
 </script>

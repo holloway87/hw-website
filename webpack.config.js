@@ -47,6 +47,12 @@ Encore
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
 
+    .configureDefinePlugin(() => ({
+        __VUE_OPTIONS_API__: true,
+        __VUE_PROD_DEVTOOLS__: false,
+        __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
+    }))
+
     .configureBabel((config) => {
         config.plugins.push('@babel/plugin-proposal-class-properties');
     })

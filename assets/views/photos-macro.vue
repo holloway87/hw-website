@@ -12,12 +12,8 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import ButtonBack from '../components/button-back';
 import PageHeader from '../components/page-header';
 import ProjectPhotosGallery from '../components/project-photos-gallery';
-
-export default {
-    components: { ButtonBack, PageHeader, ProjectPhotosGallery }
-};
 </script>

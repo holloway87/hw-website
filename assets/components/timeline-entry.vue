@@ -7,7 +7,7 @@
             >
                 <div class="flex items-center">
                     <div class="flex-none">
-                        <b-icon-calendar class="inline-block text-3xl mr-2" />
+                        <CalendarIcon class="w-9 h-9 mr-2" />
                     </div>
                     <p class="grow">
                         <span class="sm:block">{{ date }}</span>
@@ -35,38 +35,33 @@
     </div>
 </template>
 
-<script>
-import { BIconCalendar } from 'bootstrap-vue';
+<script setup>
+import { computed } from 'vue';
+import { CalendarIcon } from '@heroicons/vue/24/outline';
 import PhotosGallery from './photos-gallery';
 
-export default {
-    components: { BIconCalendar, PhotosGallery },
-    computed: {
-        entry_link() {
-            return '/timeline/' + this.id;
-        },
+const props = defineProps({
+    'date': {
+        'required': true,
+        'type': String,
     },
-    props: {
-        'date': {
-            'required': true,
-            'type': String,
-        },
-        'id': {
-            'required': true,
-            'type': String,
-        },
-        'images': {
-            'required': false,
-            'type': Array,
-        },
-        'time': {
-            'required': true,
-            'type': String,
-        },
-        'title': {
-            'required': false,
-            'type': String,
-        },
+    'id': {
+        'required': true,
+        'type': String,
     },
-};
+    'images': {
+        'required': false,
+        'type': Array,
+    },
+    'time': {
+        'required': true,
+        'type': String,
+    },
+    'title': {
+        'required': false,
+        'type': String,
+    },
+});
+
+const entry_link = computed(() => '/timeline/' + props.id);
 </script>

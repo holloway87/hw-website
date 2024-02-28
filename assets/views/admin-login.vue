@@ -33,13 +33,15 @@
     </div>
 </template>
 
-<script>
-import { AjaxRequest } from '../lib/ajax-request';
+<script setup>
 import ButtonText from '../components/button-text';
 import PageHeader from '../components/page-header';
+</script>
+
+<script>
+import { AjaxRequest } from '../lib/ajax-request';
 
 export default {
-    components: { ButtonText, PageHeader },
     data() {
         return {
             'code': '',

@@ -18,21 +18,19 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        'description': {
-            'required': true,
-            'type': String,
-        },
-        'image': {
-            'required': false,
-            'type': String,
-        },
-        'title': {
-            'required': true,
-            'type': String,
-        },
-    }
-};
+<script setup>
+defineProps({
+    'description': {
+        'required': true,
+        'type': String,
+    },
+    'image': {
+        'required': false,
+        'type': String,
+    },
+    'title': {
+        'required': true,
+        'type': String,
+    },
+});
 </script>

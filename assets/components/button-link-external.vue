@@ -4,13 +4,11 @@
     </a>
 </template>
 
-<script>
-export default {
-    props: {
-        'url': {
-            'required': true,
-            'type': String,
-        }
+<script setup>
+defineProps({
+    'url': {
+        'required': true,
+        'type': String,
     },
-};
+});
 </script>

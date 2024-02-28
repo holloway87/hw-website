@@ -5,18 +5,15 @@
     ></VuePictureSwipe>
 </template>
 
-<script>
+<script setup>
 import VuePictureSwipe from 'vue-picture-swipe';
 
-export default {
-    components: { VuePictureSwipe },
-    props: {
-        'files': {
-            'required': true,
-            'type': Array,
-        },
+defineProps({
+    'files': {
+        'required': true,
+        'type': Array,
     },
-};
+});
 </script>
 
 <style lang="scss">

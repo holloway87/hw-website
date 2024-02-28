@@ -1,0 +1,78 @@
+<template>
+    <div class="page-admin-login">
+        <PageHeader title="Admin Login" class="text-center" />
+
+        <div class="sm:max-w-md sm:mx-auto mb-5">
+            <div class="grid grid-cols-6 items-center mb-5">
+                <label for="otp-code" class="text-white">Code</label>
+                <input
+                    type="text"
+                    id="otp-code"
+                    :class="{
+                        'col-span-5': true,
+                        'w-full': true,
+                        'rounded-md': true,
+                        'outline-none': true,
+                        'py-1.5': true,
+                        'px-2': true,
+                        'text-red-900': error_message,
+                        'bg-red-100': error_message
+                    }"
+                    autocomplete="off"
+                    autofocus
+                    v-model="code"
+                    v-on:keyup="checkCodeInput">
+                <p v-if="error_message" class="col-span-5 col-start-2 text-orange-600 px-2 mt-1">{{ error_message }}</p>
+            </div>
+            <div class="text-center">
+                <ButtonText v-on:click="submitLogin">
+                    Login
+                </ButtonText>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { AjaxRequest } from '../lib/ajax-request';
+import ButtonText from '../components/button-text';
+import PageHeader from '../components/page-header';
+
+export default {
+    components: { ButtonText, PageHeader },
+    data() {
+        return {
+            'code': '',
+            'error_message': ''
+        };
+    },
+    methods: {
+        checkCodeInput(event) {
+            if ("Enter" === event.key) {
+                this.submitLogin();
+            }
+
+            if (this.error_message) {
+                this.error_message = '';
+            }
+        },
+        submitLogin() {
+            let request = new AjaxRequest('POST', '/admin-login', {'code': this.code});
+            request.send((data) => {
+                let response = JSON.parse(data.responseText);
+                if (401 === data.status && response.message) {
+                    this.error_message = response.message;
+
+                    return;
+                }
+
+                if (!response.success) {
+                    return;
+                }
+
+                this.$router.push('/');
+            });
+        },
+    },
+};
+</script>

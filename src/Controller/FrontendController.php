@@ -32,6 +32,8 @@ class FrontendController extends AbstractController
     #[Route('/photo-projects/mia', name: 'frontend_photos_mia')]
     #[Route('/timeline', name: 'frontend_timeline')]
     #[Route('/timeline-admin', name: 'frontend_timeline_admin')]
+    #[Route('/timeline-admin/edit-{id}', name: 'frontend_timeline_admin_edit_entry',
+        requirements: ['id' => '\d{8}-\d{4}'], methods: ['get'])]
     #[Route('/timeline/{id}', name: 'frontend_timeline_entry', requirements: ['id' => '\d{8}-\d{4}'])]
     public function vue(): Response
     {

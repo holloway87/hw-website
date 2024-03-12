@@ -73,6 +73,14 @@ const router = new createRouter({
             },
         },
         {
+            'path': '/timeline-admin/edit-:id',
+            'name': 'Timeline Admin - Edit Entry',
+            'component': () => import(/* webpackChunkName: "timeline-admin-edit-entry" */'./views/timeline-admin-edit-entry'),
+            'meta': {
+                'auth': true
+            },
+        },
+        {
             'path': '/timeline/:id',
             'name': 'Timeline Entry',
             'component': () => import(/* webpackChunkName: "timeline-entry" */'./views/timeline-entry'),

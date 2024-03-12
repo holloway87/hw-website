@@ -87,6 +87,22 @@ class TimelineEntry
     }
 
     /**
+     * Return serialized data.
+     *
+     * @return string
+     */
+    public function serialize(): string
+    {
+        return json_encode([
+            'title' => $this->getTitle(),
+            'content' => $this->getContent(),
+            'images' => array_map(function(TimelineEntryImage $image) {
+                return $image->getUrl();
+            }, $this->getImages())
+        ]);
+    }
+
+    /**
      * Set the content.
      *
      * @param string|null $content

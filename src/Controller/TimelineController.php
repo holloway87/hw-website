@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Component\TimelineComponent;
 use App\Entity\TimelineEntriesRequest;
 use App\Entity\TimelineEntryImage;
 use App\Form\TimelineEntriesType;
+use App\Form\TimelineEntryEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,6 +20,79 @@ use Symfony\Component\Routing\Attribute\Route;
  */
 class TimelineController extends AbstractController
 {
+    /**
+     * Deletes the timeline entry.
+     *
+     * @param Request $request
+     * @param TimelineComponent $timeline
+     * @param string $id
+     * @return JsonResponse|RedirectResponse
+     * @throws \Exception
+     */
+    #[Route('/timeline-admin/delete-{id}', requirements: ['id' => '\d{8}-\d{4}'], methods: ['post'])]
+    public function deleteEntry(Request $request, TimelineComponent $timeline, string $id)
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirectToRoute('frontend_home');
+        }
+
+        $entry = $timeline->retrieveEntry($id);
+        if (!$entry) {
+            return $this->json([
+                'success' => false,
+                'error' => 'the timeline entry could not be found'
+            ]);
+        }
+
+        $timeline->deleteEntry($entry);
+
+        return $this->json([
+            'success' => true
+        ]);
+    }
+
+    /**
+     * Edit a timeline entry.
+     *
+     * @param Request $request
+     * @param TimelineComponent $timeline
+     * @param string $id
+     * @return JsonResponse|RedirectResponse
+     * @throws \Exception
+     */
+    #[Route('/timeline-admin/edit-{id}', requirements: ['id' => '\d{8}-\d{4}'], methods: ['post'])]
+    public function editEntry(Request $request, TimelineComponent $timeline, string $id): JsonResponse|RedirectResponse
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirectToRoute('frontend_home');
+        }
+
+        $entry = $timeline->retrieveEntry($id);
+        if (!$entry) {
+            return $this->json([
+                'success' => false,
+                'error' => 'the timeline entry could not be found'
+            ]);
+        }
+
+        $form = $this->createForm(TimelineEntryEditType::class, $entry);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->json([
+                'success' => true
+            ]);
+        }
+
+        return $this->json([
+            'success' => false,
+            'error' => 'no data submitted'
+        ]);
+    }
+
     /**
      * Return timeline entries.
      *

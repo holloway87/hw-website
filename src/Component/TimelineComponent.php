@@ -19,6 +19,48 @@ class TimelineComponent
     const string TIMELINE_PATH = __DIR__.'/../../data/timeline';
 
     /**
+     * Delete the file for the timeline entry.
+     *
+     * @param TimelineEntry $entry
+     * @return void
+     */
+    public function deleteEntry(TimelineEntry $entry): void
+    {
+        unlink($this->getEntryFilename($entry));
+    }
+
+    /**
+     * Return the filename for the timeline entry.
+     *
+     * @param TimelineEntry $entry
+     * @return string
+     */
+    public function getEntryFilename(TimelineEntry $entry): string
+    {
+        return sprintf('%s/%s.json', self::TIMELINE_PATH,
+            $entry->getDate()->format('Ymd-Hi'));
+    }
+
+    /**
+     * Load the entry with the given ID.
+     *
+     * @param string $id
+     * @return TimelineEntry|null
+     * @throws \Exception
+     */
+    public function retrieveEntry(string $id): ?TimelineEntry
+    {
+        $entriesRequest = (new TimelineEntriesRequest())
+            ->setId($id);
+        $this->retrieveEntries($entriesRequest);
+        if (!$entriesRequest->getEntries()) {
+            return null;
+        }
+
+        return $entriesRequest->getEntries()[0];
+    }
+
+    /**
      * Load the entries according to the request data.
      *
      * @param TimelineEntriesRequest $request
@@ -80,5 +122,16 @@ class TimelineComponent
         }
 
         $request->setEntries($entries);
+    }
+
+    /**
+     * Save the entry to the file.
+     *
+     * @param TimelineEntry $entry
+     * @return void
+     */
+    public function saveEntry(TimelineEntry $entry): void
+    {
+        file_put_contents($this->getEntryFilename($entry), $entry->serialize());
     }
 }

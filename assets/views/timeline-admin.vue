@@ -11,7 +11,7 @@
                 <div class="col-span-5 px-2 py-1">Content</div>
                 <div class="col-span-2 px-2 py-1">Images</div>
             </div>
-            <div
+            <router-link
                 v-for="(entry, idx) in timeline_entries"
                 :class="{
                     'grid': true,
@@ -22,6 +22,7 @@
                     'border-[#1f2e2b]': true,
                     'rounded-b-md': idx === timeline_entries.length - 1
                 }"
+                :to="getEntryLink(entry)"
             >
                 <div class="col-span-2 px-2 py-1">{{ entry.date + ' ' + entry.time }}</div>
                 <div class="col-span-3 px-2 py-1">{{ entry.title ?? 'No title' }}</div>
@@ -33,7 +34,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </router-link>
         </div>
     </div>
 </template>
@@ -63,4 +64,14 @@ onMounted(() => {
 
     store.setBackUrl('/');
 });
+
+/**
+ * Returns the URL for the entry.
+ *
+ * @param entry
+ * @returns {string}
+ */
+function getEntryLink(entry) {
+    return '/timeline-admin/edit-' + entry.id;
+}
 </script>

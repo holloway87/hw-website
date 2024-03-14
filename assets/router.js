@@ -86,6 +86,14 @@ const router = new createRouter({
             'component': () => import(/* webpackChunkName: "timeline-entry" */'./views/timeline-entry'),
         },
         {
+            'path': '/media-admin:path(.*)',
+            'name': 'Media Admin',
+            'component': () => import(/* webpackChunkName: "media-admin" */'./views/media-admin'),
+            'meta': {
+                'auth': true
+            },
+        },
+        {
             'path': '/admin-login',
             'name': 'Admin Login',
             'component': () => import(/* webpackChunkName: "admin-login" */'./views/admin-login'),

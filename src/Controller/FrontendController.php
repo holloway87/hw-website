@@ -35,6 +35,7 @@ class FrontendController extends AbstractController
     #[Route('/timeline-admin/edit-{id}', name: 'frontend_timeline_admin_edit_entry',
         requirements: ['id' => '\d{8}-\d{4}'], methods: ['get'])]
     #[Route('/timeline/{id}', name: 'frontend_timeline_entry', requirements: ['id' => '\d{8}-\d{4}'])]
+    #[Route('/media-admin{path}', name: 'media_admin', requirements: ['path' => '(/[a-z0-9-_]+)*'])]
     public function vue(): Response
     {
         return $this->render('frontend/vue.html.twig');

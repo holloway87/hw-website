@@ -37,15 +37,16 @@ onMounted(() => {
     let data = new FormData();
     data.append('limit', '0');
 
-    let request = new AjaxRequest('POST', '/timeline/entries', data);
-    request.send((data) => {
-        let response = JSON.parse(data.responseText);
-        if ('object' !== typeof response) {
-            return;
-        }
+    (new AjaxRequest('POST', '/timeline/entries', data))
+        .done((data) => {
+            let response = JSON.parse(data.responseText);
+            if ('object' !== typeof response) {
+                return;
+            }
 
-        timeline_entries.value = response.entries;
-    });
+            timeline_entries.value = response.entries;
+        })
+        .send();
 
     store.setBackUrl('/');
 });

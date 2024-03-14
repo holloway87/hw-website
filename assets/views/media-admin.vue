@@ -91,14 +91,15 @@ function loadList(path) {
     data.append('path', path);
 
     list.value = {};
-    let request = new AjaxRequest('POST', '/media-list', data);
-    request.send((data) => {
-        let response = JSON.parse(data.responseText);
-        if ('object' !== typeof response) {
-            return;
-        }
+    (new AjaxRequest('POST', '/media-list', data))
+        .done((data) => {
+            let response = JSON.parse(data.responseText);
+            if ('object' !== typeof response) {
+                return;
+            }
 
-        list.value = response.list;
-    });
+            list.value = response.list;
+        })
+        .send();
 }
 </script>

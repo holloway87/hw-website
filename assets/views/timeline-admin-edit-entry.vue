@@ -71,35 +71,37 @@ onMounted(() => {
     let data = new FormData();
     data.append('id', route.params.id);
 
-    let request = new AjaxRequest('POST', '/timeline/entries', data);
-    request.send((data) => {
-        let response = JSON.parse(data.responseText);
-        if ('object' !== typeof response || !response.success) {
-            return;
-        }
+    (new AjaxRequest('POST', '/timeline/entries', data))
+        .done((data) => {
+            let response = JSON.parse(data.responseText);
+            if ('object' !== typeof response || !response.success) {
+                return;
+            }
 
-        if (1 === response.entries.length) {
-            timeline_entry.value = response.entries[0];
-        }
-    });
+            if (1 === response.entries.length) {
+                timeline_entry.value = response.entries[0];
+            }
+        })
+        .send();
 
     store.setBackUrl('/timeline-admin');
 });
 
 function deleteEntry() {
-    let request = new AjaxRequest('POST', '/timeline-admin/delete-' + timeline_entry.value.id);
-    request.send((data) => {
-        let response = JSON.parse(data.responseText);
-        if (response.message) {
-            return;
-        }
+    (new AjaxRequest('POST', '/timeline-admin/delete-' + timeline_entry.value.id))
+        .done((data) => {
+            let response = JSON.parse(data.responseText);
+            if (response.message) {
+                return;
+            }
 
-        if (!response.success) {
-            return;
-        }
+            if (!response.success) {
+                return;
+            }
 
-        router.push('/timeline-admin');
-    });
+            router.push('/timeline-admin');
+        })
+        .send();
 }
 
 function submitForm() {
@@ -107,18 +109,19 @@ function submitForm() {
     data.append('title', timeline_entry.value.title);
     data.append('content', timeline_entry.value.content);
 
-    let request = new AjaxRequest('POST', '/timeline-admin/edit-' + timeline_entry.value.id, data);
-    request.send((data) => {
-        let response = JSON.parse(data.responseText);
-        if (response.message) {
-            return;
-        }
+    (new AjaxRequest('POST', '/timeline-admin/edit-' + timeline_entry.value.id, data))
+        .done((data) => {
+            let response = JSON.parse(data.responseText);
+            if (response.message) {
+                return;
+            }
 
-        if (!response.success) {
-            return;
-        }
+            if (!response.success) {
+                return;
+            }
 
-        router.push('/timeline-admin');
-    });
+            router.push('/timeline-admin');
+        })
+        .send();
 }
 </script>

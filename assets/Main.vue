@@ -52,8 +52,10 @@ const router = useRouter();
 function logout(event) {
     event.preventDefault();
     store.setLoggedIn(false);
-    (new AjaxRequest('GET', '/admin-logout')).send(() => {
-        router.push('/');
-    });
+    (new AjaxRequest('GET', '/admin-logout'))
+        .done(() => {
+            router.push('/');
+        })
+        .send();
 }
 </script>

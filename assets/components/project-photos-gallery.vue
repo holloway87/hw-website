@@ -23,16 +23,17 @@ onMounted(() => {
     let data = new FormData();
     data.append('project', props.project);
 
-    let request = new AjaxRequest('POST', '/photos/get-files', data);
-    request.send((data) => {
-        let response = JSON.parse(data.responseText);
-        if ('object' !== typeof response || !response.success) {
-            files.value = [];
+    (new AjaxRequest('POST', '/photos/get-files', data))
+        .done((data) => {
+            let response = JSON.parse(data.responseText);
+            if ('object' !== typeof response || !response.success) {
+                files.value = [];
 
-            return;
-        }
+                return;
+            }
 
-        files.value = response.files;
-    });
+            files.value = response.files;
+        })
+        .send();
 });
 </script>

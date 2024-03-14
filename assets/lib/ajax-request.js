@@ -24,6 +24,18 @@ export class AjaxRequest {
     }
 
     /**
+     * Set the done callback.
+     *
+     * @param {Function} callback
+     * @returns {AjaxRequest}
+     */
+    done(callback) {
+        this.doneCallback = callback;
+
+        return this;
+    }
+
+    /**
      * Event if the status of the request changed.
      */
     eventStateChange() {
@@ -36,11 +48,8 @@ export class AjaxRequest {
 
     /**
      * Sends the request.  The callback will be called when the request is done.
-     *
-     * @param {Function} callback
      */
-    send(callback) {
-        this.doneCallback = callback;
+    send() {
         this.request.onreadystatechange = this.eventStateChange;
         this.request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 

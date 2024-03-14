@@ -51,16 +51,17 @@ const props = defineProps({
 });
 
 onMounted(() => {
-    let request = new AjaxRequest('GET', props.images_data_url);
-    request.send((data) => {
-        let response = JSON.parse(data.responseText);
-        if ('object' !== typeof response) {
-            return;
-        }
+    (new AjaxRequest('GET', props.images_data_url))
+        .done((data) => {
+            let response = JSON.parse(data.responseText);
+            if ('object' !== typeof response) {
+                return;
+            }
 
-        image_files.value = response.files;
-        current_image.value = 0;
-    });
+            image_files.value = response.files;
+            current_image.value = 0;
+        })
+        .send();
 });
 
 function eventNextImage() {

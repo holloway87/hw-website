@@ -58,21 +58,22 @@ function checkCodeInput(event) {
     }
 }
 function submitLogin() {
-    let request = new AjaxRequest('POST', '/admin-login', {'code': code.value});
-    request.send((data) => {
-        let response = JSON.parse(data.responseText);
-        if (401 === data.status && response.message) {
-            error_message.value = response.message;
+    (new AjaxRequest('POST', '/admin-login', {'code': code.value}))
+        .done((data) => {
+            let response = JSON.parse(data.responseText);
+            if (401 === data.status && response.message) {
+                error_message.value = response.message;
 
-            return;
-        }
+                return;
+            }
 
-        if (!response.success) {
-            return;
-        }
+            if (!response.success) {
+                return;
+            }
 
-        store.setLoggedIn(true);
-        router.push('/timeline-admin');
-    });
+            store.setLoggedIn(true);
+            router.push('/timeline-admin');
+        })
+        .send();
 }
 </script>

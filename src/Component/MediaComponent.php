@@ -4,8 +4,10 @@ namespace App\Component;
 
 use App\Entity\MediaDirectory;
 use App\Entity\MediaFile;
+use App\Entity\MediaFileUploadRequest;
 use App\Entity\MediaList;
 use App\Entity\MediaListRequest;
+use Intervention\Image\ImageManager;
 
 /**
  * Component for media files.
@@ -48,5 +50,23 @@ class MediaComponent
         $request->setFiles((new MediaList())
             ->setDirectories($directories)
             ->setFiles($files));
+    }
+
+    /**
+     * Upload a media file.
+     *
+     * @param MediaFileUploadRequest $request
+     * @return void
+     */
+    public function upload(MediaFileUploadRequest $request): void
+    {
+        $request->getFile()->move(self::PUBLIC_PATH.$request->getPath(),
+            $request->getFile()->getClientOriginalName());
+        $file = self::PUBLIC_PATH.$request->getPath().'/'.$request->getFile()->getClientOriginalName();
+
+        // scale down the image to a maximum of 800x800, aspect ratio will be kept
+        (ImageManager::gd()->read($file))
+            ->scaleDown(800, 800)
+            ->encodeByPath()->save($file);
     }
 }

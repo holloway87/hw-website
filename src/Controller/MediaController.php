@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\MediaDirectory;
 use App\Entity\MediaFile;
+use App\Entity\MediaFileUploadRequest;
 use App\Entity\MediaListRequest;
+use App\Form\MediaFileUploadType;
 use App\Form\MediaListType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -48,6 +50,36 @@ class MediaController extends AbstractController
                         return $file->getName();
                     }, $list->getFiles()->getFiles()),
                 ]
+            ]);
+        }
+
+        return $this->json([
+            'success' => false,
+            'no data submitted'
+        ]);
+    }
+
+    /**
+     * Uploads a file.
+     *
+     * @param Request $request
+     * @return JsonResponse|RedirectResponse
+     */
+    #[Route('/media-upload', name: 'media_upload', methods: ['POST'])]
+    public function uploadFile(Request $request): JsonResponse|RedirectResponse
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirectToRoute('frontend_home');
+        }
+
+        $data = new MediaFileUploadRequest();
+        $form = $this->createForm(MediaFileUploadType::class, $data);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->json([
+                'success' => true
             ]);
         }
 

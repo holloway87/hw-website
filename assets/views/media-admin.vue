@@ -37,7 +37,7 @@
                     </div>
                     <ul
                         v-if="list.files.length"
-                        class="grid grid-cols-7 gap-2 bg-[#151f1d] border-t border-[#1f2e2b] rounded-b-md p-2"
+                        class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 bg-[#151f1d] border-t border-[#1f2e2b] rounded-b-md p-2"
                     >
                         <li v-for="(entry, idx) in list.files">
                             <div class="relative cursor-pointer" v-on:click="toggleListSelect(idx)">

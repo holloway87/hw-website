@@ -9,6 +9,7 @@
                         Delete Files
                     </ButtonText>
                     <ButtonText v-on:click="openFileBrowser">Upload images</ButtonText>
+                    <ButtonLink v-if="store.logged_in" url="/timeline-admin">Timeline Admin</ButtonLink>
                 </div>
                 <input type="file" multiple class="hidden" v-on:change="queueFiles" ref="fileUpload">
             </div>
@@ -87,6 +88,7 @@ import { CheckIcon } from '@heroicons/vue/24/outline';
 import { onMounted, ref } from 'vue';
 import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 import { AjaxRequest } from '../lib/ajax-request';
+import ButtonLink from '../components/button-link';
 import ButtonText from '../components/button-text';
 import Modal from '../components/modal';
 import PageHeader from '../components/page-header';

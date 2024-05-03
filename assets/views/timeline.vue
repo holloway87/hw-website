@@ -2,6 +2,10 @@
     <div class="page-timeline">
         <PageHeader title="Timeline" class="text-center" />
 
+        <div v-if="store.logged_in" class="mb-4 text-right">
+            <ButtonLink url="/timeline-admin">Timeline Admin</ButtonLink>
+        </div>
+
         <p v-if="!timeline_entries.length" class="text-white text-center mb-4">Loading...</p>
 
         <TimelineEntry
@@ -26,6 +30,7 @@
 import { onMounted, ref } from 'vue';
 import { AjaxRequest } from '../lib/ajax-request';
 import ButtonBack from '../components/button-back';
+import ButtonLink from '../components/button-link';
 import PageHeader from '../components/page-header';
 import TimelineEntry from '../components/timeline-entry';
 import useDefaultStore from '../store';

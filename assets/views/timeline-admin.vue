@@ -4,6 +4,10 @@
             Manage timeline entries.
         </PageHeader>
 
+        <div v-if="store.logged_in" class="mb-4 text-right">
+            <ButtonLink url="/media-admin">Media Admin</ButtonLink>
+        </div>
+
         <div class="text-white mb-5">
             <div class="grid grid-cols-12 gap-3 bg-[#151f1d] rounded-t-md text-center font-semibold">
                 <div class="col-span-2 px-2 py-1">Date</div>
@@ -42,6 +46,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { AjaxRequest } from '../lib/ajax-request';
+import ButtonLink from '../components/button-link';
 import PageHeader from '../components/page-header';
 import useDefaultStore from '../store';
 

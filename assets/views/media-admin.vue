@@ -3,8 +3,13 @@
         <PageHeader title="Media Admin">Manage media files</PageHeader>
 
         <div class="text-white mb-5">
-            <div class="text-right mb-5">
-                <ButtonText v-on:click="openFileBrowser">Upload images</ButtonText>
+            <div class="mb-5">
+                <div class="flex flex-row gap-2 justify-end mb-5">
+                    <ButtonText v-if="list_delete_selected.length" v-on:click="deleteSelectedFiles">
+                        Delete Files
+                    </ButtonText>
+                    <ButtonText v-on:click="openFileBrowser">Upload images</ButtonText>
+                </div>
                 <input type="file" multiple class="hidden" v-on:change="queueFiles" ref="fileUpload">
             </div>
             <div v-if="'object' === typeof list.directories" class="sm:flex sm:flex-row sm:gap-2">
@@ -34,8 +39,16 @@
                         v-if="list.files.length"
                         class="grid grid-cols-7 gap-2 bg-[#151f1d] border-t border-[#1f2e2b] rounded-b-md p-2"
                     >
-                        <li v-for="entry in list.files">
-                            <img :src="getImageLink(entry)" :alt="entry" :title="entry">
+                        <li v-for="(entry, idx) in list.files">
+                            <div class="relative cursor-pointer" v-on:click="toggleListSelect(idx)">
+                                <div
+                                    v-if="-1 !== list_delete_selected.indexOf(idx)"
+                                    class="absolute top-2 left-2 rounded-[50%] bg-teal-600/65"
+                                >
+                                    <CheckIcon class="w-6 h-6" />
+                                </div>
+                                <img :src="getImageLink(entry)" :alt="entry" :title="entry">
+                            </div>
                         </li>
                     </ul>
                     <div
@@ -70,6 +83,7 @@
 </template>
 
 <script setup>
+import { CheckIcon } from '@heroicons/vue/24/outline';
 import { onMounted, ref } from 'vue';
 import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 import { AjaxRequest } from '../lib/ajax-request';
@@ -82,6 +96,7 @@ import useDefaultStore from '../store';
 const fileUpload = ref(null);
 const last_upload_idx = ref(-1);
 const list = ref({});
+const list_delete_selected = ref([]);
 const route = useRoute();
 const runningUploads = ref(0);
 const showUploadDialog = ref(false);
@@ -101,6 +116,29 @@ onMounted(() => {
 
     store.setBackUrl('/timeline-admin');
 });
+
+/**
+ * Submit the request to delete all selected files.
+ */
+function deleteSelectedFiles() {
+    let data = new FormData();
+
+    for (let i = 0; i < list_delete_selected.value.length; i++) {
+        data.append('files[]', route.params.path + '/' + list.value.files[list_delete_selected.value[i]]);
+    }
+
+    (new AjaxRequest('POST', '/media-delete', data))
+        .done((data) => {
+            let response = JSON.parse(data.responseText);
+            if ('object' !== typeof response) {
+                return;
+            }
+
+            list_delete_selected.value = [];
+            loadList(route.params.path);
+        })
+        .send();
+}
 
 function getDirectoryLink(name) {
     if ('..' === name) {
@@ -161,6 +199,20 @@ function queueFiles() {
 
     showUploadDialog.value = true;
     uploadFiles();
+}
+
+/**
+ * Toggle the select status of a file.
+ *
+ * @param {Integer} idx
+ */
+function toggleListSelect(idx) {
+    let delete_idx = list_delete_selected.value.indexOf(idx);
+    if (-1 === delete_idx) {
+        list_delete_selected.value.push(idx);
+    } else {
+        list_delete_selected.value.splice(delete_idx, 1);
+    }
 }
 
 /**

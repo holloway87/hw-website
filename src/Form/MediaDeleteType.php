@@ -1,0 +1,58 @@
+<?php declare(strict_types=1);
+
+namespace App\Form;
+
+use App\Component\MediaComponent;
+use App\Entity\MediaDeleteRequest;
+use App\Form\EventListener\MediaDeleteSubscriber;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+/**
+ * Form to delete media files.
+ *
+ * @since 2024.05.03
+ */
+class MediaDeleteType extends AbstractType
+{
+    /**
+     * Set all needed components.
+     *
+     * @param MediaComponent $media
+     */
+    public function __construct(private readonly MediaComponent $media) {}
+
+    /**
+     */
+    #[\Override]
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('files', CollectionType::class, [
+                'allow_add' => true,
+                'required' => true
+            ])
+            ->addEventSubscriber(new MediaDeleteSubscriber($this->media));
+    }
+
+    /**
+     */
+    #[\Override]
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'csrf_protection' => false,
+            'data_class' => MediaDeleteRequest::class,
+        ]);
+    }
+
+    /**
+     */
+    #[\Override]
+    public function getBlockPrefix(): string
+    {
+        return '';
+    }
+}

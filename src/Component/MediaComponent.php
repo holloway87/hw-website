@@ -2,6 +2,7 @@
 
 namespace App\Component;
 
+use App\Entity\MediaDeleteRequest;
 use App\Entity\MediaDirectory;
 use App\Entity\MediaFile;
 use App\Entity\MediaFileUploadRequest;
@@ -17,6 +18,24 @@ use Intervention\Image\ImageManager;
 class MediaComponent
 {
     const string PUBLIC_PATH = __DIR__.'/../../public';
+
+    /**
+     * Delete the requested media files.
+     *
+     * @param MediaDeleteRequest $request
+     * @return void
+     */
+    public function deleteFiles(MediaDeleteRequest $request): void
+    {
+        foreach ($request->getFiles() as $file) {
+            $path = self::PUBLIC_PATH.$file;
+            if (!file_exists($path)) {
+                continue;
+            }
+
+            unlink($path);
+        }
+    }
 
     /**
      * List media files.

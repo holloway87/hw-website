@@ -15,6 +15,7 @@ export class AjaxRequest {
         this.doneCallback = () => {};
         this.content = content || null;
         this.method = method;
+        this.uploadProgressCallback = () => {};
         this.url = url;
 
         this.eventStateChange = this.eventStateChange.bind(this);
@@ -52,6 +53,7 @@ export class AjaxRequest {
     send() {
         this.request.onreadystatechange = this.eventStateChange;
         this.request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        this.request.upload.onprogress = this.uploadProgressCallback;
 
         if (!(this.content instanceof FormData) && 'object' === typeof this.content) {
             this.content = JSON.stringify(this.content);
@@ -61,5 +63,17 @@ export class AjaxRequest {
         }
 
         this.request.send(this.content);
+    }
+
+    /**
+     * Set the progress handler for uploads.
+     *
+     * @param {Function} callback
+     * @returns {AjaxRequest}
+     */
+    uploadProgress(callback) {
+        this.uploadProgressCallback = callback;
+
+        return this;
     }
 }

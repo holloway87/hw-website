@@ -239,11 +239,16 @@ function uploadFile(file_idx) {
             }
 
             runningUploads.value -= 1;
-            uploadFiles();
             if (0 === runningUploads.value) {
+                uploads.value.length = 0;
+                last_upload_idx.value = -1;
                 loadList(route.params.path);
                 showUploadDialog.value = false;
+
+                return;
             }
+
+            uploadFiles();
         })
         .send();
 

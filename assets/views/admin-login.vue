@@ -39,7 +39,7 @@ import { useRouter } from 'vue-router';
 import { AjaxRequest } from '../lib/ajax-request';
 import ButtonText from '../components/button-text';
 import PageHeader from '../components/page-header';
-import useDefaultStore from '../store';
+import useDefaultStore from '../stores/default';
 
 const code = ref('');
 const error_message = ref('');

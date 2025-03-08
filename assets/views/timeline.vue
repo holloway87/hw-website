@@ -33,7 +33,7 @@ import ButtonBack from '../components/button-back';
 import ButtonLink from '../components/button-link';
 import PageHeader from '../components/page-header';
 import TimelineEntry from '../components/timeline-entry';
-import useDefaultStore from '../store';
+import useDefaultStore from '../stores/default';
 
 const store = useDefaultStore();
 const timeline_entries = ref([]);

@@ -31,7 +31,7 @@ import { CodeBracketIcon } from '@heroicons/vue/24/outline';
 import Card from '../components/card';
 import CardsContainer from '../components/cards-container';
 import PageHeader from '../components/page-header';
-import useDefaultStore from '../store';
+import useDefaultStore from '../stores/default';
 
 const store = useDefaultStore();
 

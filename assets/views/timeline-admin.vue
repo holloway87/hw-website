@@ -48,7 +48,7 @@ import { onMounted, ref } from 'vue';
 import { AjaxRequest } from '../lib/ajax-request';
 import ButtonLink from '../components/button-link';
 import PageHeader from '../components/page-header';
-import useDefaultStore from '../store';
+import useDefaultStore from '../stores/default';
 
 const store = useDefaultStore();
 const timeline_entries = ref([]);

@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import useDefaultStore from './store';
+import useDefaultStore from './stores/default';
 import { useRouter } from 'vue-router';
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline';
 import {AjaxRequest} from "./lib/ajax-request";

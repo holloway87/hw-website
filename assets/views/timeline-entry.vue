@@ -27,7 +27,7 @@ import { AjaxRequest } from '../lib/ajax-request';
 import ButtonBack from '../components/button-back';
 import PageHeader from '../components/page-header';
 import TimelineEntry from '../components/timeline-entry';
-import useDefaultStore from '../store';
+import useDefaultStore from '../stores/default';
 
 const route = useRoute();
 const store = useDefaultStore();

@@ -15,7 +15,7 @@ import { onMounted } from 'vue';
 import ButtonBack from '../components/button-back';
 import PageHeader from '../components/page-header';
 import ProjectPhotosGallery from '../components/project-photos-gallery';
-import useDefaultStore from '../store';
+import useDefaultStore from '../stores/default';
 
 const store = useDefaultStore();
 

@@ -93,7 +93,7 @@ import ButtonText from '../components/button-text';
 import Modal from '../components/modal';
 import PageHeader from '../components/page-header';
 import ProgressBar from '../components/progress-bar';
-import useDefaultStore from '../store';
+import useDefaultStore from '../stores/default';
 
 const fileUpload = ref(null);
 const last_upload_idx = ref(-1);

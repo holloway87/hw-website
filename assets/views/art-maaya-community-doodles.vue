@@ -22,7 +22,7 @@ import { onMounted } from 'vue';
 import ButtonBack from '../components/button-back';
 import ImagesPager from '../components/images-pager';
 import PageHeader from '../components/page-header';
-import useDefaultStore from '../store';
+import useDefaultStore from '../stores/default';
 
 const store = useDefaultStore();
 

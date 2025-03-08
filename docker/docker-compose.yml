@@ -1,12 +1,13 @@
-version: '3.8'
 services:
   hw-website:
-    image: webdevops/php-apache-dev:8.3
+    build:
+      context: ./hw-website/
+      args:
+        - WWW_DATA_USER_ID=$UID
     container_name: hw-website
     ports:
-      - "8080:80"
+      - ${WEB_PORT:-8080}:80
     volumes:
-      - ../:/app
+      - ../:/var/www/html
     environment:
-      - WEB_DOCUMENT_ROOT=/app/public
-      - WEB_ALIAS_DOMAIN=holloway-web.test
+      - WEB_DOCUMENT_ROOT=/var/www/html/public

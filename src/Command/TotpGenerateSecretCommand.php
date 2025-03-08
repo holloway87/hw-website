@@ -13,17 +13,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @since 2024.02.27
  */
-#[AsCommand(name: 'totp:generate-secret')]
+#[AsCommand(name: 'totp:generate-secret', description: 'Generate a TOTP secret.')]
 class TotpGenerateSecretCommand extends Command
 {
-    /**
-     */
-    #[\Override]
-    protected function configure(): void
-    {
-        $this->setDescription('Generate a TOTP secret.');
-    }
-
     /**
      */
     #[\Override]

@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @since 2024.02.27
  */
-#[AsCommand(name: 'totp:qr-code')]
+#[AsCommand(name: 'totp:qr-code', description: 'Show the QR code for the TOTP secret.')]
 class TotpQrCodeCommand extends Command
 {
     /**
@@ -27,14 +27,6 @@ class TotpQrCodeCommand extends Command
     public function __construct(private readonly string $totp_secret)
     {
         parent::__construct();
-    }
-
-    /**
-     */
-    #[\Override]
-    protected function configure(): void
-    {
-        $this->setDescription('Show the QR code for the TOTP secret.');
     }
 
     /**

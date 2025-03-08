@@ -12,7 +12,7 @@
                         <label class="font-400 text-white block mb-1">Title</label>
                         <input
                             type="text"
-                            class="border border-[#151f1d] px-2 py-1 outline-none rounded-md bg-white text-black w-full"
+                            class="border border-[#151f1d] px-2 py-1 outline-hidden rounded-md bg-white text-black w-full"
                             v-model="timeline_entry.title"
                         >
                     </div>
@@ -20,7 +20,7 @@
                         <label class="font-400 text-white block mb-1">Content</label>
                         <textarea
                             type="text"
-                            class="border border-[#151f1d] px-2 py-1 outline-none rounded-md bg-white text-black w-full"
+                            class="border border-[#151f1d] px-2 py-1 outline-hidden rounded-md bg-white text-black w-full"
                             rows="10"
                             v-model="timeline_entry.content"
                         ></textarea>

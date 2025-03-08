@@ -72,7 +72,7 @@
                         <div class="my-auto w-16 mr-2">
                             <img v-if="file.image" :src="file.image" alt="Upload preview">
                         </div>
-                        <div class="flex-grow my-auto">
+                        <div class="grow my-auto">
                             <p class="mb-2">{{ file.name }}</p>
                             <ProgressBar :progress="file.uploaded" />
                         </div>

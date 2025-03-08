@@ -17,6 +17,8 @@ defineProps({
 </script>
 
 <style lang="scss">
+@reference "../styles/app.css"
+
 .my-gallery {
     @apply grid grid-cols-1 gap-4;
 

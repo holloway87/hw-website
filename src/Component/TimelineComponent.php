@@ -19,6 +19,23 @@ class TimelineComponent
     const string TIMELINE_PATH = __DIR__.'/../../data/timeline';
 
     /**
+     * Create a new empty time entry and save it on the filesystem. It returns the id.
+     *
+     * @return string
+     */
+    public function createEntry(): string
+    {
+        $now = new \DateTime();
+        $id = $now->format('Ymd-Hi');
+        $entry = new TimelineEntry()
+            ->setId($id)
+            ->setDate($now);
+        $this->saveEntry($entry);
+
+        return $id;
+    }
+
+    /**
      * Delete the file for the timeline entry.
      *
      * @param TimelineEntry $entry

@@ -21,6 +21,30 @@ use Symfony\Component\Routing\Attribute\Route;
 class TimelineController extends AbstractController
 {
     /**
+     * Creates a new timeline entry and returns the id.
+     *
+     * @param Request $request
+     * @param TimelineComponent $timeline
+     * @return JsonResponse|RedirectResponse
+     */
+    #[Route('/timeline-admin/create', methods: ['post'])]
+    public function createEntry(Request $request, TimelineComponent $timeline)
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirectToRoute('frontend_home');
+        }
+
+        $id = $timeline->createEntry();
+
+        return $this->json([
+            'success' => true,
+            'id' => $id
+        ]);
+    }
+
+    /**
      * Deletes the timeline entry.
      *
      * @param Request $request

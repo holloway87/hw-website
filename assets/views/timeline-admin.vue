@@ -4,7 +4,8 @@
             Manage timeline entries.
         </PageHeader>
 
-        <div v-if="store.logged_in" class="mb-4 text-right">
+        <div v-if="store.logged_in" class="flex flex-row gap-2 justify-end mb-5">
+            <ButtonText v-on:click="createEntry">Create entry</ButtonText>
             <ButtonLink url="/media-admin">Media Admin</ButtonLink>
         </div>
 
@@ -26,7 +27,7 @@
                     'border-[#1f2e2b]': true,
                     'rounded-b-md': idx === timeline_entries.length - 1
                 }"
-                :to="getEntryLink(entry)"
+                :to="getEntryLink(entry.id)"
             >
                 <div class="col-span-2 px-2 py-1">{{ entry.date + ' ' + entry.time }}</div>
                 <div class="col-span-3 px-2 py-1">{{ entry.title ?? 'No title' }}</div>
@@ -45,11 +46,14 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { AjaxRequest } from '../lib/ajax-request';
 import ButtonLink from '../components/button-link';
+import ButtonText from '../components/button-text';
 import PageHeader from '../components/page-header';
 import useDefaultStore from '../stores/default';
 
+const router = useRouter();
 const store = useDefaultStore();
 const timeline_entries = ref([]);
 
@@ -72,12 +76,28 @@ onMounted(() => {
 });
 
 /**
+ * Create a new entry and redirect to the edit form.
+ */
+function createEntry() {
+    (new AjaxRequest('POST', '/timeline-admin/create'))
+        .done((data) => {
+            let response = JSON.parse(data.responseText);
+            if ('object' !== typeof response) {
+                return;
+            }
+
+            router.push(getEntryLink(response.id));
+        })
+        .send();
+}
+
+/**
  * Returns the URL for the entry.
  *
- * @param entry
+ * @param {string} id
  * @returns {string}
  */
-function getEntryLink(entry) {
-    return '/timeline-admin/edit-' + entry.id;
+function getEntryLink(id) {
+    return '/timeline-admin/edit-' + id;
 }
 </script>

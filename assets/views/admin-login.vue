@@ -15,6 +15,10 @@
                         'outline-hidden': true,
                         'py-1.5': true,
                         'px-2': true,
+                        'border': true,
+                        'border-[#151f1d]': true,
+                        'bg-white': !error_message,
+                        'text-black': !error_message,
                         'text-red-900': error_message,
                         'bg-red-100': error_message
                     }"

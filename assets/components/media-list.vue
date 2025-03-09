@@ -5,19 +5,20 @@
                 <div class="bg-[#151f1d] rounded-t-md text-center font-semibold">
                     <div class="px-2 py-1">Directories</div>
                 </div>
-                <router-link
+                <div
                     v-for="(entry, idx) in directories"
                     :class="{
                         'block': true,
                         'bg-[#151f1d]': true,
                         'border-t': true,
                         'border-[#1f2e2b]': true,
-                        'rounded-b-md': idx === directories.length - 1
+                        'rounded-b-md': idx === directories.length - 1,
+                        'cursor-pointer': true
                     }"
-                    :to="getDirectoryLink(entry)"
+                    v-on:click="$emit('directory-selected', getDirectoryLink(entry))"
                 >
                     <div class="px-2 py-1">{{ entry }}</div>
-                </router-link>
+                </div>
             </div>
             <div class="grow mb-4">
                 <div class="bg-[#151f1d] rounded-t-md text-center font-semibold">
@@ -57,6 +58,7 @@
 import { CheckIcon } from '@heroicons/vue/24/outline';
 import useMediaAdminStore from '../stores/media-admin';
 
+defineEmits(['directory-selected']);
 const mediaAdminStore = useMediaAdminStore();
 const props = defineProps({
     'directories': {
@@ -81,10 +83,10 @@ const props = defineProps({
  */
 function getDirectoryLink(name) {
     if ('..' === name) {
-        return '/media-admin' + props.path.replace(/\/[^\/]+$/, '')
+        return props.path.replace(/\/[^\/]+$/, '')
     }
 
-    return '/media-admin' + props.path + name;
+    return props.path + name;
 }
 
 /**

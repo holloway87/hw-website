@@ -12,14 +12,14 @@
                     <ButtonLink v-if="store.logged_in" url="/timeline-admin">Timeline Admin</ButtonLink>
                 </div>
             </div>
-            <MediaList :path="route.params.path" :files="list.files" :directories="list.directories" />
+            <MediaList :path="route.params.path" :files="list.files" :directories="list.directories" v-on:directory-selected="(path) => router.push('/media-admin' + path)" />
         </div>
     </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import { onBeforeRouteUpdate, useRoute } from 'vue-router';
+import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
 import { AjaxRequest } from '../lib/ajax-request';
 import ButtonLink from '../components/button-link';
 import ButtonText from '../components/button-text';
@@ -34,6 +34,7 @@ const list = ref({
     'files': [],
 });
 const route = useRoute();
+const router = useRouter();
 const store = useDefaultStore();
 const mediaAdminStore = useMediaAdminStore();
 

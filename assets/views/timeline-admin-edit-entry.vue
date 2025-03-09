@@ -107,8 +107,11 @@ function deleteEntry() {
 
 function submitForm() {
     let data = new FormData();
-    data.append('title', timeline_entry.value.title);
-    data.append('content', timeline_entry.value.content);
+    data.append('title', timeline_entry.value.title ?? '');
+    data.append('content', timeline_entry.value.content ?? '');
+    for (let i = 0; i < timeline_entry.value.images.length; i++) {
+        data.append('images[]', timeline_entry.value.images[i].src);
+    }
 
     (new AjaxRequest('POST', '/timeline-admin/edit-' + timeline_entry.value.id, data))
         .done((data) => {

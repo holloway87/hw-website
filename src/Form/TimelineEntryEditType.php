@@ -6,6 +6,7 @@ use App\Component\TimelineComponent;
 use App\Entity\TimelineEntry;
 use App\Form\EventListener\TimelineEntryEditSubscriber;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,6 +36,12 @@ class TimelineEntryEditType extends AbstractType
                 'required' => false,
             ])
             ->add('content', TextareaType::class, [
+                'required' => false
+            ])
+            ->add('images', CollectionType::class, [
+                'allow_add' => true,
+                'allow_delete' => true,
+                'entry_type' => TimelineEntryImageType::class,
                 'required' => false
             ])
             ->addEventSubscriber(new TimelineEntryEditSubscriber($this->timeline));

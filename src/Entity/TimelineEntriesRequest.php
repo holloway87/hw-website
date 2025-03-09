@@ -25,6 +25,11 @@ class TimelineEntriesRequest
     private ?string $id = null;
 
     /**
+     * If empty entries will be included.
+     */
+    private bool $includeEmpty = false;
+
+    /**
      * Maximum amount of entries to retrieve.
      */
     #[Assert\PositiveOrZero(message: 'Enter a valid positive limit.')]
@@ -59,6 +64,16 @@ class TimelineEntriesRequest
     }
 
     /**
+     * Returns if empty entries will be included.
+     *
+     * @return bool
+     */
+    public function isIncludeEmpty(): bool
+    {
+        return $this->includeEmpty;
+    }
+
+    /**
      * Set the retrieved entries.
      *
      * @param TimelineEntry[] $entries
@@ -80,6 +95,19 @@ class TimelineEntriesRequest
     public function setId(?string $id): self
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Set if empty entries will be included.
+     *
+     * @param bool $includeEmpty
+     * @return self
+     */
+    public function setIncludeEmpty(bool $includeEmpty): self
+    {
+        $this->includeEmpty = $includeEmpty;
 
         return $this;
     }

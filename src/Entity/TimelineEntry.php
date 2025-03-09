@@ -87,6 +87,18 @@ class TimelineEntry
     }
 
     /**
+     * Returns if the entry is empty.
+     *
+     * This checks the title, content and images.
+     *
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return !$this->title && !$this->content && !$this->images;
+    }
+
+    /**
      * Return serialized data.
      *
      * @return string

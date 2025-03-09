@@ -70,6 +70,7 @@ const timeline_entry = ref(null);
 onMounted(() => {
     let data = new FormData();
     data.append('id', route.params.id);
+    data.append('includeEmpty', '1');
 
     (new AjaxRequest('POST', '/timeline/entries', data))
         .done((data) => {

@@ -67,7 +67,8 @@ class TimelineComponent
      */
     public function retrieveEntry(string $id): ?TimelineEntry
     {
-        $entriesRequest = (new TimelineEntriesRequest())
+        $entriesRequest = new TimelineEntriesRequest()
+            ->setIncludeEmpty(true)
             ->setId($id);
         $this->retrieveEntries($entriesRequest);
         if (!$entriesRequest->getEntries()) {
@@ -107,13 +108,13 @@ class TimelineComponent
 
         $entries = [];
         foreach ($timeline_entries as $key => $data) {
-            $entry = (new TimelineEntry())
+            $entry = new TimelineEntry()
                 ->setId($key)
                 ->setDate($data['date'])
                 ->setTitle(array_key_exists('title', $data) ? $data['title'] : null)
                 ->setContent(array_key_exists('content', $data) ? $data['content'] : null)
                 ->setImages(array_map(function (string $image) {
-                    $entry_image = (new TimelineEntryImage())
+                    $entry_image = new TimelineEntryImage()
                         ->setUrl($image);
                     $size = getimagesize(__DIR__.'/../../public'.$image);
                     if ($size) {
@@ -123,6 +124,10 @@ class TimelineComponent
 
                     return $entry_image;
                 }, array_key_exists('images', $data) ? $data['images'] : []));
+
+            if (!$request->isIncludeEmpty() && $entry->isEmpty()) {
+                continue;
+            }
 
             if ($request->getId()) {
                 if ($request->getId() == $key) {

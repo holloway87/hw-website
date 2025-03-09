@@ -6,6 +6,7 @@ use App\Component\TimelineComponent;
 use App\Entity\TimelineEntriesRequest;
 use App\Form\EventListener\TimelineEntriesSubscriber;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,6 +37,10 @@ class TimelineEntriesType extends AbstractType
             ])
             ->add('limit', NumberType::class, [
                 'required' => false
+            ])
+            ->add('includeEmpty', CheckboxType::class, [
+                'empty_data' => null,
+                'required' => false,
             ])
             ->addEventSubscriber(new TimelineEntriesSubscriber($this->timeline));
     }

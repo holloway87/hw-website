@@ -60,6 +60,7 @@ const timeline_entries = ref([]);
 onMounted(() => {
     let data = new FormData();
     data.append('limit', '0');
+    data.append('includeEmpty', '1');
 
     (new AjaxRequest('POST', '/timeline/entries', data))
         .done((data) => {

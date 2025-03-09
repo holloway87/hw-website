@@ -36,6 +36,9 @@
                         </ul>
                         <p v-if="!timeline_entry.images.length" class="text-white">No images</p>
                     </div>
+                    <div class="mb-4">
+                        <ButtonText v-on:click="chooseImages">Choose images</ButtonText>
+                    </div>
                 </div>
             </div>
             <div class="grid grid-cols-2">
@@ -51,6 +54,13 @@
                 </div>
             </div>
         </div>
+
+        <Modal :show="showChooseImagesDialog" title="Choose images" size="4xl">
+            <MediaList :path="mediaPath" :files="mediaList.files" :directories="mediaList.directories" v-on:directory-selected="loadMediaDirectory" />
+            <div class="mt-4">
+                <ButtonText v-on:click="closeChooseImagesDialog">Done</ButtonText>
+            </div>
+        </Modal>
     </div>
 </template>
 
@@ -59,12 +69,22 @@ import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { AjaxRequest } from '../lib/ajax-request';
 import ButtonText from '../components/button-text';
+import Modal from '../components/modal';
+import MediaList from '../components/media-list';
 import PageHeader from '../components/page-header';
 import useDefaultStore from '../stores/default';
+import useMediaAdminStore from '../stores/media-admin';
 
 const route = useRoute();
 const router = useRouter();
 const store = useDefaultStore();
+const mediaAdminStore = useMediaAdminStore();
+const mediaList = ref({
+    'directories': [],
+    'files': [],
+});
+const mediaPath = ref('');
+const showChooseImagesDialog = ref(false);
 const timeline_entry = ref(null);
 
 onMounted(() => {
@@ -88,6 +108,35 @@ onMounted(() => {
     store.setBackUrl('/timeline-admin');
 });
 
+/**
+ * Show the choose images modal and select all images currently registered.
+ */
+function chooseImages() {
+    mediaAdminStore.resetFiles();
+    for (let i = 0; i < timeline_entry.value.images.length; i++) {
+        mediaAdminStore.addFile(timeline_entry.value.images[i].src);
+    }
+    loadMediaList(mediaPath.value);
+    showChooseImagesDialog.value = true;
+}
+
+/**
+ * Close the choose images dialog and save all selected images to the timeline entry.
+ */
+function closeChooseImagesDialog() {
+    timeline_entry.value.images = [];
+    for (let i = 0; i < mediaAdminStore.selected_files.length; i++) {
+        timeline_entry.value.images.push({
+            'src': mediaAdminStore.selected_files[i],
+            'thumbnail': mediaAdminStore.selected_files[i],
+        });
+    }
+    showChooseImagesDialog.value = false;
+}
+
+/**
+ * Deletes the entry.
+ */
 function deleteEntry() {
     (new AjaxRequest('POST', '/timeline-admin/delete-' + timeline_entry.value.id))
         .done((data) => {
@@ -105,6 +154,44 @@ function deleteEntry() {
         .send();
 }
 
+/**
+ * Set the new path and load the directories and files for it.
+ *
+ * @param {string} path
+ */
+function loadMediaDirectory(path) {
+    mediaPath.value = path;
+    loadMediaList(path);
+}
+
+/**
+ * Load all directories and files for the path.
+ *
+ * @param {string} path
+ */
+function loadMediaList(path) {
+    let data = new FormData();
+    data.append('path', path);
+
+    mediaList.value = {
+        'directories': [],
+        'files': [],
+    };
+    (new AjaxRequest('POST', '/media-list', data))
+        .done((data) => {
+            let response = JSON.parse(data.responseText);
+            if ('object' !== typeof response) {
+                return;
+            }
+
+            mediaList.value = response.list;
+        })
+        .send();
+}
+
+/**
+ * Submits the timeline entry data to save it.
+ */
 function submitForm() {
     let data = new FormData();
     data.append('title', timeline_entry.value.title ?? '');

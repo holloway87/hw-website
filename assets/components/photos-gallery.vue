@@ -33,13 +33,13 @@ defineProps({
 
 .gallery-columns-2 {
     .my-gallery {
-        @apply grid-cols-2;
+        @apply grid grid-cols-2;
     }
 }
 
 .gallery-columns-3 {
     .my-gallery {
-        @apply grid-cols-2 sm:grid-cols-3;
+        @apply grid grid-cols-2 sm:grid-cols-3;
     }
 }
 </style>

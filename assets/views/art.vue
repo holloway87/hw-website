@@ -12,13 +12,6 @@
                 title="The Life of Abe"
                 url="/illustrations/the-life-of-abe"
             />
-            <CardImageLink
-                class="mb-5"
-                description="Silly doodles about Maaya's community."
-                image="/images/art_maaya_community_doodles.png"
-                title="Maaya's community doodles"
-                url="/illustrations/maaya-community-doodles"
-            />
         </CardsContainer>
 
         <div class="text-center mb-4">

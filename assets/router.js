@@ -15,11 +15,6 @@ const router = new createRouter({
             'component': () => import(/* webpackChunkName: "art" */'./views/art'),
         },
         {
-            'path': '/illustrations/maaya-community-doodles',
-            'name': 'Maaya\'s community doodles',
-            'component': () => import(/* webpackChunkName: "art-maaya-community-doodles" */'./views/art-maaya-community-doodles'),
-        },
-        {
             'path': '/illustrations/the-life-of-abe',
             'name': 'The Life of Abe',
             'component': () => import(/* webpackChunkName: "art-the-life-of-abe" */'./views/art-the-life-of-abe'),

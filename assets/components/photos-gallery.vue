@@ -16,13 +16,13 @@ defineProps({
 });
 </script>
 
-<style lang="scss">
-@reference "../styles/app.css"
+<style>
+@reference "../styles/app.css";
 
 .my-gallery {
-    @apply grid grid-cols-1 gap-4;
+    @apply grid grid-cols-1 gap-3;
 
-    figure.gallery-thumbnail {
+    .gallery-thumbnail {
         @apply m-0;
 
         img {
@@ -33,13 +33,13 @@ defineProps({
 
 .gallery-columns-2 {
     .my-gallery {
-        @apply grid grid-cols-2;
+        @apply grid-cols-2;
     }
 }
 
 .gallery-columns-3 {
     .my-gallery {
-        @apply grid grid-cols-2 sm:grid-cols-3;
+        @apply grid-cols-2 sm:grid-cols-3;
     }
 }
 </style>

@@ -15,6 +15,16 @@
                     GitHub source
                 </ButtonLinkExternal>
             </Card>
+
+            <Card class="mb-5" title="Little web games" description="A collection of simple games made with pure javascript.">
+                <ButtonLinkExternal
+                    url="https://gitlab.holloway-web.de/holloway/little-web-games"
+                    target="_blank"
+                >
+                    <CodeBracketIcon class="h-6 inline-block align-bottom mr-1" />
+                    GitLab source
+                </ButtonLinkExternal>
+            </Card>
         </CardsContainer>
 
         <div class="text-center mb-4">

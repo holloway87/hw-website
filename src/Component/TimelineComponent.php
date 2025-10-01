@@ -119,7 +119,8 @@ class TimelineComponent
                     $size = getimagesize(__DIR__.'/../../public'.$image);
                     if ($size) {
                         $entry_image->setWidth($size[0])
-                            ->setHeight($size[1]);
+                            ->setHeight($size[1])
+                            ->setMimeType($size['mime']);
                     }
 
                     return $entry_image;

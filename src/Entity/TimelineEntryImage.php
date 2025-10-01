@@ -15,6 +15,11 @@ class TimelineEntryImage
     private ?int $height = null;
 
     /**
+     * Mime type for the image.
+     */
+    private ?string $mimeType = null;
+
+    /**
      * URL.
      */
     private ?string $url = null;
@@ -32,6 +37,16 @@ class TimelineEntryImage
     public function getHeight(): ?int
     {
         return $this->height;
+    }
+
+    /**
+     * Return the mime type for the image.
+     *
+     * @return string|null
+     */
+    public function getMimeType(): ?string
+    {
+        return $this->mimeType;
     }
 
     /**
@@ -63,6 +78,19 @@ class TimelineEntryImage
     public function setHeight(?int $height): self
     {
         $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * Set the mime type for the image.
+     *
+     * @param string|null $mimeType
+     * @return self
+     */
+    public function setMimeType(?string $mimeType): self
+    {
+        $this->mimeType = $mimeType;
 
         return $this;
     }

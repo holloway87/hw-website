@@ -7,11 +7,18 @@ use App\Entity\TimelineEntriesRequest;
 use App\Entity\TimelineEntryImage;
 use App\Form\TimelineEntriesType;
 use App\Form\TimelineEntryEditType;
+use FeedIo\Adapter\NullClient;
+use FeedIo\Feed;
+use FeedIo\Feed\Item\Media;
+use FeedIo\FeedIo;
+use Psr\Log\NullLogger;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Controller to access timeline entries.
@@ -115,6 +122,50 @@ class TimelineController extends AbstractController
             'success' => false,
             'error' => 'no data submitted'
         ]);
+    }
+
+    /**
+     * Generate an atom feed for the timeline entries.
+     *
+     * @param TimelineComponent $timeline
+     * @return Response
+     */
+    #[Route('/timeline/feed')]
+    public function feed(TimelineComponent $timeline): Response
+    {
+        $feedIo = new FeedIo(new NullClient(), new NullLogger());
+
+        $feed = new Feed;
+        $feed->setTitle('hw-web Timeline');
+        $feed->setLink($this->generateUrl('frontend_timeline', [], UrlGeneratorInterface::ABSOLUTE_URL));
+        $feed->setDescription('See what happens in my life, what I see around me with photos, or anything else.');
+
+        $timlineRequest = new TimelineEntriesRequest();
+        $timeline->retrieveEntries($timlineRequest);
+        foreach ($timlineRequest->getEntries() as $entry) {
+            $feedEntry = $feed->newItem();
+
+            if ($entry->getImages()) {
+                foreach ($entry->getImages() as $image) {
+                    $media = new Media;
+                    $media->setUrl(rtrim($this->generateUrl('frontend_home', [], UrlGeneratorInterface::ABSOLUTE_URL), '/').$image->getUrl())
+                        ->setType($image->getMimeType() ?: '');
+                    $feedEntry->addMedia($media);
+                }
+            }
+
+            $feedEntry->setTitle($entry->getTitle() ?: $entry->getDate()->format('d.m.Y H:i'));
+            $feedEntry->setContent($entry->getContent());
+            $feedEntry->setLink($this->generateUrl(
+                'frontend_timeline_entry',
+                ['id' => $entry->getId()],
+                UrlGeneratorInterface::ABSOLUTE_URL,
+            ));
+            $feedEntry->setLastModified($entry->getDate());
+            $feed->add($feedEntry);
+        }
+
+        return new Response($feedIo->toAtom($feed), 200, ['Content-Type' => 'application/atom+xml']);
     }
 
     /**

@@ -12,6 +12,7 @@
         "chillerlan/php-qrcode": "^5.0",
         "doctrine/annotations": "^1.13",
         "intervention/image": "^3.4",
+        "php-feed-io/feed-io": "^6.1",
         "spomky-labs/otphp": "^11.2",
         "symfony/apache-pack": "^1.0",
         "symfony/console": "6.4.*",
@@ -42,6 +43,7 @@
         },
         "sort-packages": true,
         "allow-plugins": {
+            "php-http/discovery": false,
             "symfony/flex": true,
             "symfony/runtime": true
         }

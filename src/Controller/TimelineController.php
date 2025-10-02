@@ -145,17 +145,25 @@ class TimelineController extends AbstractController
         foreach ($timlineRequest->getEntries() as $entry) {
             $feedEntry = $feed->newItem();
 
+            $content = $entry->getContent();
             if ($entry->getImages()) {
                 foreach ($entry->getImages() as $image) {
                     $media = new Media;
                     $media->setUrl(rtrim($this->generateUrl('frontend_home', [], UrlGeneratorInterface::ABSOLUTE_URL), '/').$image->getUrl())
                         ->setType($image->getMimeType() ?: '');
                     $feedEntry->addMedia($media);
+
+                    $content .= sprintf(
+                        '<p><img src="%s" width="%d" height="%d"></p>',
+                        rtrim($this->generateUrl('frontend_home', [], UrlGeneratorInterface::ABSOLUTE_URL), '/').$image->getUrl(),
+                        $image->getWidth(),
+                        $image->getHeight(),
+                    );
                 }
             }
 
             $feedEntry->setTitle($entry->getTitle() ?: $entry->getDate()->format('d.m.Y H:i'));
-            $feedEntry->setContent($entry->getContent());
+            $feedEntry->setContent($content);
             $feedEntry->setLink($this->generateUrl(
                 'frontend_timeline_entry',
                 ['id' => $entry->getId()],

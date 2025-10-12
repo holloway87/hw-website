@@ -1,10 +1,11 @@
 <template>
     <div id="page-media-admin">
-        <PageHeader title="Media Admin">Manage media files</PageHeader>
+        <PageHeader title="Media Admin" />
 
-        <div class="text-text mb-5">
-            <div class="mb-5">
-                <div class="flex flex-row gap-2 justify-end mb-5">
+        <WidgetContainer class="mb-4">
+            <div class="flex flex-col md:flex-row gap-4">
+                <SubHeading>Manage media files</SubHeading>
+                <div class="md:grow flex flex-row md:justify-end gap-2">
                     <ButtonText v-if="mediaAdminStore.selected_files.length" v-on:click="deleteSelectedFiles">
                         Delete Files
                     </ButtonText>
@@ -12,6 +13,8 @@
                     <ButtonLink v-if="store.logged_in" url="/timeline-admin">Timeline Admin</ButtonLink>
                 </div>
             </div>
+        </WidgetContainer>
+        <div class="text-text mb-10">
             <MediaList :path="route.params.path" :files="list.files" :directories="list.directories" v-on:directory-selected="(path) => router.push('/media-admin' + path)" />
         </div>
     </div>
@@ -26,6 +29,8 @@ import ButtonText from '../components/button-text';
 import MediaList from '../components/media-list';
 import MediaUploader from '../components/media-uploader';
 import PageHeader from '../components/page-header';
+import SubHeading from '../components/sub-heading';
+import WidgetContainer from '../components/widget-container';
 import useDefaultStore from '../stores/default';
 import useMediaAdminStore from '../stores/media-admin';
 

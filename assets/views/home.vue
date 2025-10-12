@@ -1,53 +1,57 @@
 <template>
     <div class="page-home">
-        <PageHeader title="Welcome">
-            Choose a category:
-        </PageHeader>
+        <PageHeader title="Welcome" />
 
-        <CardsContainer class="mb-10">
-            <CardImageLink
-                class="mb-5"
-                description="Have a look at my illustrations."
-                image="/images/home_art.png"
-                title="Art"
-                url="/illustrations"
-            />
-            <CardImageLink
-                class="mb-5"
-                description="I sometimes like to take photos."
-                image="/images/home_photos.png"
-                title="Photos"
-                url="/photo-projects"
-            />
-            <CardImageLink
-                class="mb-5"
-                description="These are some of my programming projects."
-                image="/images/home_dev.png"
-                title="Programming"
-                url="/dev"
-            />
-        </CardsContainer>
-
-        <div class="flex flex-col sm:flex-row sm:justify-center gap-4 w-full mb-4">
-            <div class="sm:text-right">
-                <ButtonLink url="/timeline">
-                    <CalendarIcon class="h-6 inline-block align-bottom" /> Show timeline
-                </ButtonLink>
+        <div class="grid sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-3 gap-4">
+            <div class="md:col-span-2 lg:col-span-1">
+                <WidgetContainer class="mb-10">
+                    <SubHeading class="mb-4">Choose a category:</SubHeading>
+                    <CardImageLink
+                        class="block mb-5"
+                        description="Have a look at my illustrations."
+                        image="/images/home_art.png"
+                        title="Art"
+                        url="/illustrations"
+                    />
+                    <CardImageLink
+                        class="block mb-5"
+                        description="I sometimes like to take photos."
+                        image="/images/home_photos.png"
+                        title="Photos"
+                        url="/photo-projects"
+                    />
+                    <CardImageLink
+                        class="block"
+                        description="These are some of my programming projects."
+                        image="/images/home_dev.png"
+                        title="Programming"
+                        url="/dev"
+                    />
+                </WidgetContainer>
             </div>
-            <p class="text-text my-auto">Recent posts:</p>
-        </div>
+            <div class="md:col-span-3 lg:col-span-2">
+                <WidgetContainer class="mb-4">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <SubHeading class="md:grow">Latest timeline entry:</SubHeading>
+                        <ButtonLink class="order-first md:order-last" url="/timeline">
+                            <CalendarIcon class="h-6 inline-block align-bottom" /> Show timeline
+                        </ButtonLink>
+                    </div>
+                </WidgetContainer>
 
-        <TimelineEntry
-            v-for="entry in timeline_entries"
-            :key="entry.date + entry.time"
-            :id="entry.id"
-            :title="entry.title"
-            :images="entry.images"
-            :date="entry.date"
-            :time="entry.time"
-        >
-            <p v-html="entry.content"></p>
-        </TimelineEntry>
+                <TimelineEntry
+                    v-for="entry in timeline_entries"
+                    :key="entry.date + entry.time"
+                    :id="entry.id"
+                    :title="entry.title"
+                    :images="entry.images"
+                    :date="entry.date"
+                    :time="entry.time"
+                >
+                    <p v-html="entry.content"></p>
+                </TimelineEntry>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -57,9 +61,10 @@ import { AjaxRequest } from '../lib/ajax-request';
 import ButtonLink from '../components/button-link';
 import { CalendarIcon } from '@heroicons/vue/24/outline';
 import CardImageLink from '../components/card-image-link';
-import CardsContainer from '../components/cards-container';
 import PageHeader from '../components/page-header';
+import SubHeading from '../components/sub-heading';
 import TimelineEntry from '../components/timeline-entry';
+import WidgetContainer from '../components/widget-container';
 import useDefaultStore from '../stores/default';
 
 const store = useDefaultStore();
@@ -67,7 +72,7 @@ const timeline_entries = ref([]);
 
 onMounted(() => {
     let data = new FormData();
-    data.append('limit', '5');
+    data.append('limit', '1');
 
     (new AjaxRequest('POST', '/timeline/entries', data))
         .done((data) => {

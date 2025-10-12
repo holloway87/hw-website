@@ -1,9 +1,9 @@
 <template>
-    <div class="sm:flex sm:max-w-2xl sm:mx-auto mb-5">
+    <div class="sm:flex sm:max-w-full sm:mx-auto mb-5">
         <div class="sm:flex-none">
             <router-link
                 :to="entry_link"
-                class="bg-widget text-text text-sm inline-block sm:text-right p-3 rounded-md shadow-md sm:w-[7.5rem]"
+                class="bg-widget text-text text-sm inline-block sm:text-right p-3 rounded-md shadow-md sm:w-[8rem]"
             >
                 <div class="flex items-center">
                     <div class="flex-none">

@@ -1,11 +1,11 @@
 <template>
     <div id="page-timeline-admin-edit-entry">
-        <PageHeader title="Timeline Admin - Edit entry">
-            <span v-if="timeline_entry">{{ timeline_entry.date }} {{ timeline_entry.time }}</span>
-        </PageHeader>
+        <PageHeader title="Timeline Admin - Edit entry" />
 
         <p v-if="!timeline_entry" class="text-text text-center mb-4">Loading...</p>
-        <div v-if="timeline_entry" class="bg-widget rounded-md shadow-md p-4 mb-4">
+        <WidgetContainer v-if="timeline_entry" class="bg-widget rounded-md shadow-md p-4 mb-4">
+            <SubHeading class="mb-4">{{ timeline_entry.date }} {{ timeline_entry.time }}</SubHeading>
+
             <div class="sm:grid sm:grid-cols-2 sm:gap-3">
                 <div>
                     <div class="mb-4">
@@ -53,7 +53,7 @@
                     </ButtonText>
                 </div>
             </div>
-        </div>
+        </WidgetContainer>
 
         <Modal :show="showChooseImagesDialog" title="Choose images" size="4xl">
             <MediaList :path="mediaPath" :files="mediaList.files" :directories="mediaList.directories" v-on:directory-selected="loadMediaDirectory" />
@@ -72,6 +72,8 @@ import ButtonText from '../components/button-text';
 import Modal from '../components/modal';
 import MediaList from '../components/media-list';
 import PageHeader from '../components/page-header';
+import SubHeading from '../components/sub-heading';
+import WidgetContainer from '../components/widget-container';
 import useDefaultStore from '../stores/default';
 import useMediaAdminStore from '../stores/media-admin';
 

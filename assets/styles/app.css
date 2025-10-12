@@ -3,11 +3,29 @@
 @theme {
     --color-background: #4E6A5E;
     --color-error: #BA1200;
-    --color-error-background: #FF5A47;
+    --color-error-background: #FFB6AD;
     --color-error-shadow: #7A0C00;
     --color-widget: #18324E;
     --color-primary: #508D69;
     --color-primary-shadow: #3B684E;
     --color-text: #F7F5F3;
     --color-text-shadow: #DED6CE;
+    --default-font-family: "Barlow", ui-sans-serif, sanf-serif;
+    --heading-font-family: "Karla", ui-sans-serif, sans-serif;
+}
+
+@font-face {
+    font-family: "Barlow";
+    src: url("../fonts/Barlow-Regular.ttf") format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Karla";
+    src: url("../fonts/Karla-SemiBold.ttf") format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
 }

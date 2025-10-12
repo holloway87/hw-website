@@ -1,6 +1,6 @@
 <template>
     <div class="page-header">
-        <h1 class="text-text text-3xl mb-4">
+        <h1 class="font-(family-name:--heading-font-family) font-semibold text-text text-3xl mb-4">
             {{ title }}
         </h1>
 

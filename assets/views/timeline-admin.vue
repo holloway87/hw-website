@@ -1,15 +1,19 @@
 <template>
     <div class="page-timeline-admin">
-        <PageHeader title="Timeline Admin">
-            Manage timeline entries.
-        </PageHeader>
+        <PageHeader title="Timeline Admin" />
 
-        <div v-if="store.logged_in" class="flex flex-row gap-2 justify-end mb-5">
-            <ButtonText v-on:click="createEntry">Create entry</ButtonText>
-            <ButtonLink url="/media-admin">Media Admin</ButtonLink>
-        </div>
+        <WidgetContainer class="mb-4">
+            <div class="flex flex-col md:flex-row gap-4">
+                <SubHeading>Manage timeline entries.</SubHeading>
 
-        <div class="text-text bg-widget rounded-md shadow-md mb-5">
+                <div v-if="store.logged_in" class="md:grow flex flex-row md:justify-end gap-2">
+                    <ButtonText v-on:click="createEntry">Create entry</ButtonText>
+                    <ButtonLink url="/media-admin">Media Admin</ButtonLink>
+                </div>
+            </div>
+        </WidgetContainer>
+
+        <div class="text-text bg-widget rounded-md shadow-md mb-10">
             <div class="grid grid-cols-12 gap-3 text-center font-semibold">
                 <div class="col-span-2 px-2 py-1">Date</div>
                 <div class="col-span-3 px-2 py-1">Title</div>
@@ -49,6 +53,8 @@ import { AjaxRequest } from '../lib/ajax-request';
 import ButtonLink from '../components/button-link';
 import ButtonText from '../components/button-text';
 import PageHeader from '../components/page-header';
+import SubHeading from '../components/sub-heading';
+import WidgetContainer from '../components/widget-container';
 import useDefaultStore from '../stores/default';
 
 const router = useRouter();

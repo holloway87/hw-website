@@ -11,18 +11,30 @@
                                 <a
                                     href=""
                                     :class="{
-                                        'text-primary': true,
-                                        'hover:text-primary-shadow': true,
-                                        'mr-4': !store.back_url
+                                        'inline-block': true,
+                                        'h-9': true,
+                                        'bg-primary': true,
+                                        'text-text': true,
+                                        'text-md': true,
+                                        'text-center': true,
+                                        'leading-7': true,
+                                        'pl-1.5': true,
+                                        'py-1': true,
+                                        'align-middle': true,
+                                        'pr-1.5': store.back_url,
+                                        'pr-4': !store.back_url,
+                                        'sm:pr-2.5': !store.back_url,
+                                        'sm:mr-4': !store.back_url,
                                     }"
                                     v-on:click="logout"
                                 >
+                                    <PowerIcon class="h-5 inline-block align-text-bottom" />
                                     Logout
                                 </a>
                             </li>
                             <li v-if="store.back_url">
                                 <router-link
-                                    class="inline-block h-9 bg-primary text-widget text-md text-center leading-7 pl-1.5 pr-4 sm:pr-2.5 sm:mr-4 py-1 align-middle"
+                                    class="inline-block h-9 bg-primary text-text text-md text-center leading-7 pl-1.5 pr-4 sm:pr-2.5 sm:mr-4 py-1 align-middle"
                                     :to="store.back_url"
                                 >
                                     <ChevronLeftIcon class="h-5 inline-block align-text-bottom" />
@@ -43,7 +55,7 @@
 <script setup>
 import useDefaultStore from './stores/default';
 import { useRouter } from 'vue-router';
-import { ChevronLeftIcon } from '@heroicons/vue/24/outline';
+import { ChevronLeftIcon, PowerIcon } from '@heroicons/vue/24/outline';
 import {AjaxRequest} from "./lib/ajax-request";
 
 const store = useDefaultStore();

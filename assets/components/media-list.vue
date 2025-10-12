@@ -2,7 +2,7 @@
     <div class="media-list">
         <div v-if="directories.length" class="sm:flex sm:flex-row sm:gap-2">
             <div class="mb-4">
-                <div class="bg-[#151f1d] rounded-md shadow-md">
+                <div class="bg-widget rounded-md shadow-md">
                     <div class="text-center font-semibold">
                         <div class="px-2 py-1">Directories</div>
                     </div>
@@ -11,7 +11,7 @@
                         :class="{
                             'block': true,
                             'border-t': true,
-                            'border-[#1f2e2b]': true,
+                            'border-background': true,
                             'cursor-pointer': true
                         }"
                         v-on:click="$emit('directory-selected', getDirectoryLink(entry))"
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="grow mb-4">
-                <div class="bg-[#151f1d] rounded-md shadow-md">
+                <div class="bg-widget rounded-md shadow-md">
                     <div class=" text-center font-semibold">
                         <div class="px-2 py-1">Images</div>
                     </div>
@@ -33,7 +33,7 @@
                             <div class="relative cursor-pointer" v-on:click="toggleListSelect(getImageLink(entry))">
                                 <div
                                     v-if="-1 !== mediaAdminStore.selected_files.indexOf(getImageLink(entry))"
-                                    class="absolute top-2 left-2 rounded-[50%] bg-teal-600/65"
+                                    class="absolute top-2 left-2 rounded-[50%] bg-primary"
                                 >
                                     <CheckIcon class="w-6 h-6" />
                                 </div>
@@ -43,7 +43,7 @@
                     </ul>
                     <div
                         v-if="!files.length"
-                        class="bg-[#151f1d] border-t border-[#1f2e2b] rounded-b-md px-2 py-1"
+                        class="bg-widget border-t border-background rounded-b-md px-2 py-1"
                     >
                         <p>No images</p>
                     </div>

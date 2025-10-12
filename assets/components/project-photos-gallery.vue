@@ -1,7 +1,7 @@
 <template>
     <div class="project-photos-gallery">
-        <p v-if="loading" class="text-white mb-4">Loading...</p>
-        <p v-if="!loading && !files.length" class="text-white mb-4">There was an error loading the photos.</p>
+        <p v-if="loading" class="text-text mb-4">Loading...</p>
+        <p v-if="!loading && !files.length" class="text-text mb-4">There was an error loading the photos.</p>
         <PhotosGallery v-if="files.length" class="gallery-columns-3" :files="files" />
     </div>
 </template>

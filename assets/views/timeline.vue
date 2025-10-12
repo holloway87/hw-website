@@ -6,7 +6,7 @@
             <ButtonLink url="/timeline-admin">Timeline Admin</ButtonLink>
         </div>
 
-        <p v-if="!timeline_entries.length" class="text-white text-center mb-4">Loading...</p>
+        <p v-if="!timeline_entries.length" class="text-text text-center mb-4">Loading...</p>
 
         <TimelineEntry
             v-for="entry in timeline_entries"

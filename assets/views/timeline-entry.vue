@@ -2,7 +2,7 @@
     <div class="page-timeline-entry">
         <PageHeader title="Timeline entry" class="text-center" />
 
-        <p v-if="!timeline_entry" class="text-white text-center mb-4">Loading...</p>
+        <p v-if="!timeline_entry" class="text-text text-center mb-4">Loading...</p>
         <TimelineEntry
             v-if="timeline_entry"
             :id="timeline_entry.id"

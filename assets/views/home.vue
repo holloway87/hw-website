@@ -34,7 +34,7 @@
                     <CalendarIcon class="h-6 inline-block align-bottom" /> Show timeline
                 </ButtonLink>
             </div>
-            <p class="text-white my-auto">Recent posts:</p>
+            <p class="text-text my-auto">Recent posts:</p>
         </div>
 
         <TimelineEntry

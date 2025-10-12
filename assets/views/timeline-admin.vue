@@ -9,7 +9,7 @@
             <ButtonLink url="/media-admin">Media Admin</ButtonLink>
         </div>
 
-        <div class="text-white bg-[#151f1d] rounded-md shadow-md mb-5">
+        <div class="text-text bg-widget rounded-md shadow-md mb-5">
             <div class="grid grid-cols-12 gap-3 text-center font-semibold">
                 <div class="col-span-2 px-2 py-1">Date</div>
                 <div class="col-span-3 px-2 py-1">Title</div>
@@ -23,7 +23,7 @@
                     'grid-cols-12': true,
                     'gap-3': true,
                     'border-t': true,
-                    'border-[#1f2e2b]': true,
+                    'border-background': true,
                 }"
                 :to="getEntryLink(entry.id)"
             >

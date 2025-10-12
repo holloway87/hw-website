@@ -2,7 +2,7 @@
     <div id="page-media-admin">
         <PageHeader title="Media Admin">Manage media files</PageHeader>
 
-        <div class="text-white mb-5">
+        <div class="text-text mb-5">
             <div class="mb-5">
                 <div class="flex flex-row gap-2 justify-end mb-5">
                     <ButtonText v-if="mediaAdminStore.selected_files.length" v-on:click="deleteSelectedFiles">

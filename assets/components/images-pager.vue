@@ -1,7 +1,7 @@
 <template>
     <div class="images-pager mb-5">
-        <p v-if="null === image_files">Loading...</p>
-        <p v-if="null !== image_files && !image_files.length">{{ no_images_message }}</p>
+        <p class="text-text" v-if="null === image_files">Loading...</p>
+        <p class="text-text" v-if="null !== image_files && !image_files.length">{{ no_images_message }}</p>
 
         <div v-if="null !== image_files && image_files.length">
             <div class="grid grid-cols-2">

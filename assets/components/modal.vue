@@ -4,11 +4,11 @@
         <div class="flex min-h-full items-center justify-center px-4 py-8">
             <div
                 :class="{
-                    'bg-[#151f1d]': true,
+                    'bg-widget': true,
                     'rounded-md': true,
                     'shadow-md': true,
                     'shadow-gray-900/65': true,
-                    'text-white': true,
+                    'text-text': true,
                     'w-full': true,
                     'max-w-lg': 'lg' === size,
                     'max-w-2xl': '2xl' === size,

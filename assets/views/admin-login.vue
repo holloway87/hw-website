@@ -2,9 +2,9 @@
     <div class="page-admin-login">
         <PageHeader title="Admin Login" class="text-center" />
 
-        <div class="sm:max-w-md sm:mx-auto bg-[#151f1d] rounded-md shadow-md p-4 mb-5">
+        <div class="sm:max-w-md sm:mx-auto bg-widget rounded-md shadow-md p-4 mb-5">
             <div class="grid grid-cols-6 items-center mb-5">
-                <label for="otp-code" class="text-white">Code</label>
+                <label for="otp-code" class="text-text">Code</label>
                 <input
                     type="text"
                     id="otp-code"
@@ -17,18 +17,18 @@
                         'py-1.5': true,
                         'px-2': true,
                         'border-2': true,
-                        'border-gray-600': !error_message,
-                        'bg-gray-300': !error_message,
-                        'text-black': !error_message,
-                        'border-red-900': error_message,
-                        'bg-red-100': error_message,
-                        'text-red-900': error_message,
+                        'border-text-shadow': !error_message,
+                        'bg-text': !error_message,
+                        'text-widget': !error_message,
+                        'border-error-shadow': error_message,
+                        'bg-error-background': error_message,
+                        'text-error': error_message,
                     }"
                     autocomplete="off"
                     autofocus
                     v-model="code"
                     v-on:keyup="checkCodeInput">
-                <p v-if="error_message" class="col-span-5 col-start-2 text-orange-600 px-2 mt-1">{{ error_message }}</p>
+                <p v-if="error_message" class="col-span-5 col-start-2 text-error px-2 mt-1">{{ error_message }}</p>
             </div>
             <div class="text-center">
                 <ButtonText v-on:click="submitLogin">

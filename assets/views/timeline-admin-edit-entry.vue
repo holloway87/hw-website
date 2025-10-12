@@ -5,14 +5,14 @@
         </PageHeader>
 
         <p v-if="!timeline_entry" class="text-white text-center mb-4">Loading...</p>
-        <div v-if="timeline_entry">
+        <div v-if="timeline_entry" class="bg-[#151f1d] rounded-md shadow-md p-4 mb-4">
             <div class="sm:grid sm:grid-cols-2 sm:gap-3">
                 <div>
                     <div class="mb-4">
                         <label class="font-400 text-white block mb-1">Title</label>
                         <input
                             type="text"
-                            class="border border-[#151f1d] px-2 py-1 outline-hidden rounded-md bg-white text-black w-full"
+                            class="border border-2 border-gray-600 px-2 py-1 outline-hidden rounded-md shadow-mg bg-gray-300 text-black w-full"
                             v-model="timeline_entry.title"
                         >
                     </div>
@@ -20,7 +20,7 @@
                         <label class="font-400 text-white block mb-1">Content</label>
                         <textarea
                             type="text"
-                            class="border border-[#151f1d] px-2 py-1 outline-hidden rounded-md bg-white text-black w-full"
+                            class="border border-2 border-gray-600 px-2 py-1 outline-hidden rounded-md shadow-md bg-gray-300 text-black w-full"
                             rows="10"
                             v-model="timeline_entry.content"
                         ></textarea>

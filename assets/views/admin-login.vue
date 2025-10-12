@@ -2,7 +2,7 @@
     <div class="page-admin-login">
         <PageHeader title="Admin Login" class="text-center" />
 
-        <div class="sm:max-w-md sm:mx-auto mb-5">
+        <div class="sm:max-w-md sm:mx-auto bg-[#151f1d] rounded-md shadow-md p-4 mb-5">
             <div class="grid grid-cols-6 items-center mb-5">
                 <label for="otp-code" class="text-white">Code</label>
                 <input
@@ -16,12 +16,13 @@
                         'outline-hidden': true,
                         'py-1.5': true,
                         'px-2': true,
-                        'border': true,
-                        'border-[#151f1d]': true,
-                        'bg-white': !error_message,
+                        'border-2': true,
+                        'border-gray-600': !error_message,
+                        'bg-gray-300': !error_message,
                         'text-black': !error_message,
+                        'border-red-900': error_message,
+                        'bg-red-100': error_message,
                         'text-red-900': error_message,
-                        'bg-red-100': error_message
                     }"
                     autocomplete="off"
                     autofocus

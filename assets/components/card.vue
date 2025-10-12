@@ -3,6 +3,7 @@
         'relative': image,
         'bg-[#151f1d]': !image,
         'rounded-md': !image,
+        'shadow-md': true
     }">
         <img v-if="image" :src="image" class="rounded-md" :alt="title">
         <div :class="{

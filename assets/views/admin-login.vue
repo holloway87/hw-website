@@ -12,6 +12,7 @@
                         'col-span-5': true,
                         'w-full': true,
                         'rounded-md': true,
+                        'shadow-md': true,
                         'outline-hidden': true,
                         'py-1.5': true,
                         'px-2': true,

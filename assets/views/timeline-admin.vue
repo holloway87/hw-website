@@ -9,8 +9,8 @@
             <ButtonLink url="/media-admin">Media Admin</ButtonLink>
         </div>
 
-        <div class="text-white mb-5">
-            <div class="grid grid-cols-12 gap-3 bg-[#151f1d] rounded-t-md text-center font-semibold">
+        <div class="text-white bg-[#151f1d] rounded-md shadow-md mb-5">
+            <div class="grid grid-cols-12 gap-3 text-center font-semibold">
                 <div class="col-span-2 px-2 py-1">Date</div>
                 <div class="col-span-3 px-2 py-1">Title</div>
                 <div class="col-span-5 px-2 py-1">Content</div>
@@ -22,10 +22,8 @@
                     'grid': true,
                     'grid-cols-12': true,
                     'gap-3': true,
-                    'bg-[#151f1d]': true,
                     'border-t': true,
                     'border-[#1f2e2b]': true,
-                    'rounded-b-md': idx === timeline_entries.length - 1
                 }"
                 :to="getEntryLink(entry.id)"
             >

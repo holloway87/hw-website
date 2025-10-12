@@ -3,7 +3,7 @@
         <div class="sm:flex-none">
             <router-link
                 :to="entry_link"
-                class="bg-[#151f1d] text-white text-sm inline-block sm:text-right p-3 rounded-md sm:w-[7.5rem]"
+                class="bg-[#151f1d] text-white text-sm inline-block sm:text-right p-3 rounded-md shadow-md sm:w-[7.5rem]"
             >
                 <div class="flex items-center">
                     <div class="flex-none">
@@ -21,7 +21,7 @@
             ></div>
         </div>
         <div class="sm:grow">
-            <div class="bg-[#151f1d] p-3 rounded-md">
+            <div class="bg-[#151f1d] p-3 rounded-md shadow-md">
                 <h3 v-if="title" class="text-white text-2xl mb-3">{{ title }}</h3>
                 <div v-if="$slots.default" class="text-white mb-3">
                     <slot />

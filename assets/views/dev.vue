@@ -25,6 +25,16 @@
                     GitLab source
                 </ButtonLinkExternal>
             </Card>
+
+            <Card class="mb-5" title="Obsidian streak plugin" description="A calender view for your streaks in Obsidian.">
+                <ButtonLinkExternal
+                    url="https://gitlab.holloway-web.de/holloway/hw-streaks"
+                    target="_blank"
+                >
+                    <CodeBracketIcon class="h-6 inline-block align-bottom mr-1" />
+                    GitLab source
+                </ButtonLinkExternal>
+            </Card>
         </CardsContainer>
 
         <div class="text-center mb-4">

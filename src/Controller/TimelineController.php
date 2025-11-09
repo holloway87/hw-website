@@ -35,8 +35,10 @@ class TimelineController extends AbstractController
      * @return JsonResponse|RedirectResponse
      */
     #[Route('/timeline-admin/create', methods: ['post'])]
-    public function createEntry(Request $request, TimelineComponent $timeline)
-    {
+    public function createEntry(
+        Request $request,
+        TimelineComponent $timeline
+    ): JsonResponse|RedirectResponse {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
         if (!$request->isXmlHttpRequest()) {
@@ -61,8 +63,11 @@ class TimelineController extends AbstractController
      * @throws \Exception
      */
     #[Route('/timeline-admin/delete-{id}', requirements: ['id' => '\d{8}-\d{4}'], methods: ['post'])]
-    public function deleteEntry(Request $request, TimelineComponent $timeline, string $id)
-    {
+    public function deleteEntry(
+        Request $request,
+        TimelineComponent $timeline,
+        string $id
+    ): JsonResponse|RedirectResponse {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
         if (!$request->isXmlHttpRequest()) {
@@ -94,8 +99,11 @@ class TimelineController extends AbstractController
      * @throws \Exception
      */
     #[Route('/timeline-admin/edit-{id}', requirements: ['id' => '\d{8}-\d{4}'], methods: ['post'])]
-    public function editEntry(Request $request, TimelineComponent $timeline, string $id): JsonResponse|RedirectResponse
-    {
+    public function editEntry(
+        Request $request,
+        TimelineComponent $timeline,
+        string $id
+    ): JsonResponse|RedirectResponse {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
         if (!$request->isXmlHttpRequest()) {

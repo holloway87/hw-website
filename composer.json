@@ -33,7 +33,7 @@
     },
     "require-dev": {
         "symfony/maker-bundle": "^1.36",
-        "symfony/web-profiler-bundle": "6.4.*"
+        "symfony/web-profiler-bundle": "*"
     },
     "config": {
         "optimize-autoloader": true,
@@ -87,7 +87,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.4.*"
+            "require": "8.0.*"
         }
     }
 }

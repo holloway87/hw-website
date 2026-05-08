@@ -44,7 +44,7 @@ class AdminAuthenticator extends AbstractAuthenticator
             throw new BadRequestHttpException('no code provided in json data');
         }
 
-        $user_badge = new UserBadge('', $this->user_loader->loadUserByIdentifier(...));
+        $user_badge = new UserBadge('admin', $this->user_loader->loadUserByIdentifier(...));
 
         return new Passport($user_badge, new CustomCredentials([$this, 'checkCredentials'], $data['code']),
             [new PreAuthenticatedUserBadge()]);

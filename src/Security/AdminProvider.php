@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
  * User provider for admin.
  *
  * @since 2024.02.28
+ * @implements UserProviderInterface<Admin>
  */
 class AdminProvider implements UserProviderInterface
 {

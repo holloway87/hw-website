@@ -6,7 +6,7 @@
             <p v-if="!timeline_entry" class="text-text text-center mb-4">Loading...</p>
             <TimelineEntry
                 v-if="timeline_entry"
-                :id="timeline_entry.id"
+                :link="timeline_entry.link"
                 :title="timeline_entry.title"
                 :images="timeline_entry.images"
                 :date="timeline_entry.date"

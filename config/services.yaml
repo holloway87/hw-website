@@ -28,6 +28,10 @@ services:
         arguments:
             $totp_secret: '%env(TOTP_SECRET)%'
 
+    App\Component\BlogComponent:
+        arguments:
+            $blog_path: '%env(BLOG_PATH)%'
+
     App\Security\AdminAuthenticator:
         arguments:
             $totp_secret: '%env(TOTP_SECRET)%'

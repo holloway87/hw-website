@@ -42,7 +42,7 @@
                 <TimelineEntry
                     v-for="entry in timeline_entries"
                     :key="entry.date + entry.time"
-                    :id="entry.id"
+                    :link="entry.link"
                     :title="entry.title"
                     :images="entry.images"
                     :date="entry.date"
@@ -50,6 +50,24 @@
                 >
                     <p v-html="entry.content"></p>
                 </TimelineEntry>
+
+                <WidgetContainer class="mb-4">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <SubHeading class="md:grow">Latest blog entry:</SubHeading>
+                        <ButtonLink class="order-first md:order-last" url="/blog">
+                            <CalendarIcon class="h-6 inline-block align-bottom" /> Show blog
+                        </ButtonLink>
+                    </div>
+                </WidgetContainer>
+
+                <BlogEntry
+                    v-for="entry in blog_entries"
+                    :content="entry.content"
+                    :date="entry.date"
+                    :link="entry.link"
+                    :time="entry.time"
+                    :title="entry.title"
+                />
             </div>
         </div>
     </div>
@@ -58,6 +76,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { AjaxRequest } from '../lib/ajax-request';
+import BlogEntry from '../components/blog-entry';
 import ButtonLink from '../components/button-link';
 import { CalendarIcon } from '@heroicons/vue/24/outline';
 import CardImageLink from '../components/card-image-link';
@@ -68,6 +87,7 @@ import WidgetContainer from '../components/widget-container';
 import useDefaultStore from '../stores/default';
 
 const store = useDefaultStore();
+const blog_entries = ref([]);
 const timeline_entries = ref([]);
 
 onMounted(() => {
@@ -82,6 +102,16 @@ onMounted(() => {
             }
 
             timeline_entries.value = response.entries;
+        })
+        .send();
+    (new AjaxRequest('POST', '/blog/get-entries', data))
+        .done((data) => {
+            let response = JSON.parse(data.responseText);
+            if ('object' !== typeof response) {
+                return;
+            }
+
+            blog_entries.value = response.entries;
         })
         .send();
 

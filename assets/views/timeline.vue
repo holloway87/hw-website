@@ -12,7 +12,7 @@
             <TimelineEntry
                 v-for="entry in timeline_entries"
                 :key="entry.date + entry.time"
-                :id="entry.id"
+                :link="entry.link"
                 :title="entry.title"
                 :images="entry.images"
                 :date="entry.date"

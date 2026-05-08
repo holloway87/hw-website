@@ -2,7 +2,7 @@
     <div class="sm:flex sm:max-w-full sm:mx-auto mb-5">
         <div class="sm:flex-none">
             <router-link
-                :to="entry_link"
+                :to="link"
                 class="bg-widget text-text text-sm inline-block sm:text-right p-3 rounded-md shadow-md sm:w-[8rem]"
             >
                 <div class="flex items-center">
@@ -27,7 +27,7 @@
                     <slot />
                 </div>
 
-                <PhotosGallery v-if="images.length" :files="images" :class="{
+                <PhotosGallery v-if="'undefined' !== typeof images && images.length" :files="images" :class="{
                     'gallery-columns-2': 2 <= images.length
                 }" />
             </div>
@@ -36,7 +36,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
 import { CalendarIcon } from '@heroicons/vue/24/outline';
 import PhotosGallery from './photos-gallery';
 
@@ -45,13 +44,13 @@ const props = defineProps({
         'required': true,
         'type': String,
     },
-    'id': {
-        'required': true,
-        'type': String,
-    },
     'images': {
         'required': false,
         'type': Array,
+    },
+    'link': {
+        'required': true,
+        'type': String,
     },
     'time': {
         'required': true,
@@ -62,6 +61,4 @@ const props = defineProps({
         'type': String,
     },
 });
-
-const entry_link = computed(() => '/timeline/' + props.id);
 </script>

@@ -10,6 +10,16 @@ const router = new createRouter({
             'component': () => import(/* webpackChunkName: "home" */'./views/home'),
         },
         {
+            'path': '/blog',
+            'name': 'blog',
+            'component': () => import(/* webpackChunkName: "blog" */'./views/blog'),
+        },
+        {
+            'path': '/blog/:slug',
+            'name': 'blog-entry',
+            'component': () => import(/* webpackChunkName: "blog-entry" */'./views/blog-entry'),
+        },
+        {
             'path': '/illustrations',
             'name': 'Art',
             'component': () => import(/* webpackChunkName: "art" */'./views/art'),

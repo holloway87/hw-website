@@ -220,7 +220,8 @@ class TimelineController extends AbstractController
                             'w' => $image->getWidth(),
                             'h' => $image->getHeight()
                         ];
-                    }, $entry->getImages())
+                    }, $entry->getImages()),
+                    'link' => $this->generateUrl('frontend_timeline_entry', ['id' => $entry->getId()]),
                 ];
             }
 

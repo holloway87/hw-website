@@ -1,7 +1,7 @@
 import { marked } from 'marked';
 const renderer = {
     code({ lang, text }) {
-        return `<pre class="mb-4"><code data-language="${lang}">${text}</code></pre>`;
+        return `<pre class="mb-4 px-2 py-1.5 border-2 rounded-md border-dashed border-white/50 overflow-x-scroll contain-inline-size"><code data-language="${lang}">${text}</code></pre>`;
     },
     heading({ tokens, depth }) {
         const text = this.parser.parseInline(tokens);

@@ -11,6 +11,9 @@ class BlogEntry
 {
     public string $content = '';
     public \DateTime|null $created = null;
+    public string $date = '';
+    public string $link = '';
     public string $slug = '';
+    public string $time = '';
     public string $title = '';
 }

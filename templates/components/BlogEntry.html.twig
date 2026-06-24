@@ -1,0 +1,4 @@
+{% props content, date, link, time, title %}
+<twig:TimelineEntry date="{{ date }}" link="{{ link }}" time="{{ time }}" title="{{ title }}">
+    {{ content|markdown_to_html }}
+</twig:TimelineEntry>

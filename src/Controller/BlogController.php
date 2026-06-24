@@ -2,13 +2,20 @@
 
 namespace App\Controller;
 
+use App\Component\HtmlMeta;
+use App\Entity\BlogEntry;
 use App\Entity\BlogListRequest;
+use App\Entity\OpenGraphData;
 use App\Form\BlogListType;
+use App\Markdown\MarkdownSanitizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\ValueResolver;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Controller for the blog.
@@ -44,9 +51,9 @@ class BlogController extends AbstractController
                     'title' => $entry->title,
                     'content' => $entry->content,
                     'created' => $entry->created->format(\DateTimeInterface::RFC3339),
-                    'date' => $entry->created->format('d.m.y'),
-                    'link' => $this->generateUrl('frontend_blog_entry', ['slug' => $entry->slug]),
-                    'time' => $entry->created->format('H:i'),
+                    'date' => $entry->date,
+                    'link' => $entry->link,
+                    'time' => $entry->time,
                 ];
             }
 
@@ -56,6 +63,33 @@ class BlogController extends AbstractController
         return $this->json([
             'success' => false,
             'error' => 'no data submitted'
+        ]);
+    }
+
+    /**
+     * View for a blog entry.
+     *
+     * @param BlogEntry $blog_entry
+     * @return Response
+     */
+    #[Route('/blog/{blog_entry}', name: 'blog_entry', requirements: ['blog_entry' => '[^/\?]+'])]
+    public function listEntry(
+        HtmlMeta $html_meta,
+        #[ValueResolver('blog_entry')] BlogEntry $blog_entry,
+    ): Response {
+        $html_meta->back_url = $this->generateUrl('frontend_blog');
+        $html_meta->title = 'Blog - '.$blog_entry->title.' - hw-web';
+        $html_meta->open_graph = new OpenGraphData;
+        $html_meta->open_graph->locale = 'en_US';
+        $html_meta->open_graph->type = 'article';
+        $html_meta->open_graph->title = $blog_entry->title;
+        $html_meta->open_graph->description = MarkdownSanitizer::sanitize($blog_entry->content);
+        $html_meta->open_graph->article_published_time = $blog_entry->created;
+        $html_meta->open_graph->site_name = 'hw-web';
+        $html_meta->open_graph->url = $this->generateUrl('blog_entry', ['blog_entry' => $blog_entry->slug], UrlGeneratorInterface::ABSOLUTE_URL);
+
+        return $this->render('blog/list_entry.html.twig', [
+            'blog_entry' => $blog_entry,
         ]);
     }
 }

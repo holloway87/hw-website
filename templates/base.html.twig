@@ -3,18 +3,39 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{%if html_meta.title %}{{ html_meta.title }}{% else %}Welcome!{% endif %}{% endblock %}</title>
         <link rel="icon" href="/images/favicon.ico">
         <link rel="me" href="https://mastodon.art/@holloway">
+        {% include 'elements/html_meta.html.twig' %}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
     </head>
     <body class="bg-background">
-        {% block body %}{% endblock %}
+        <div class="sticky top-0 left-0 right-0 bg-widget shadow-md shadow-gray-900/65 h-9 z-20 mb-5">
+            <div class="container mx-auto lg:max-w-[1140px]">
+                <div class="flex flex-row items-center">
+                    <a href="/" class="inline-block text-text text-xl leading-9 ml-4">hw-web</a>
+                    <div class="grow">
+                        <ul class="flex flex-row gap-3 items-center justify-end">
+                            {% if html_meta.back_url %}
+                                <li>
+                                    <a
+                                        href="{{ html_meta.back_url }}"
+                                        class="inline-block h-9 bg-primary text-text text-md text-center leading-7 pl-1.5 pr-4 sm:pr-2.5 sm:mr-4 py-1 align-middle"
+                                    >
+                                        <twig:Heroicons:ChevronLeft class="h-5 inline-block align-text-bottom" />
+                                        back
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-4 lg:max-w-[1140px]">
+            {% block body %}{% endblock %}
+        </div>
     </body>
 </html>

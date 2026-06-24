@@ -1,0 +1,31 @@
+{% props date, link, time, title %}
+<div class="sm:flex sm:max-w-full sm:mx-auto mb-5">
+    <div class="sm:flex-none">
+        <a
+            href="{{ link }}"
+            class="bg-widget text-text text-sm inline-block sm:text-right p-3 rounded-md shadow-md sm:w-[8rem]"
+        >
+            <div class="flex items-center">
+                <div class="flex-none">
+                    <twig:Heroicons:Calendar class="w-9 h-9 mr-2" />
+                </div>
+                <p class="grow">
+                    <span class="sm:block">{{ date }}</span>
+                    {{ time }}
+                </p>
+            </div>
+        </a>
+    </div>
+    <div class="sm:flex-none">
+        <div class="w-6 h-5 border-r-2 sm:w-5 sm:mt-6 sm:border-t-2 sm:border-r-0 border-dashed border-widget"
+        ></div>
+    </div>
+    <div class="sm:grow">
+        <div class="bg-widget p-3 rounded-md shadow-md">
+            {% if title %}<h3 class="text-text text-2xl mb-3">{{ title }}</h3>{% endif %}
+            <div class="text-text mb-3">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</div>

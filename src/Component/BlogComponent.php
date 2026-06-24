@@ -4,6 +4,7 @@ namespace App\Component;
 
 use App\Entity\BlogEntry;
 use App\Entity\BlogListRequest;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Component for the blog.
@@ -12,8 +13,10 @@ use App\Entity\BlogListRequest;
  */
 class BlogComponent
 {
-    public function __construct(private readonly string $blog_path)
-    {}
+    public function __construct(
+        private readonly string $blog_path,
+        private readonly RouterInterface $router,
+    ) {}
 
     /**
      * Read all blog files and set the entries in the request object.
@@ -26,9 +29,9 @@ class BlogComponent
             $path = sprintf('%s/%s.md', $this->blog_path, $request->slug);
             if (\file_exists($path)) {
                 $request->entries = [$this->processFile(sprintf('%s.md', $request->slug))];
-
-                return;
             }
+
+            return;
         }
 
         $dir = dir($this->blog_path);
@@ -65,9 +68,12 @@ class BlogComponent
         $entry = new BlogEntry;
         $entry->content = file_get_contents($path);
         $entry->slug = mb_substr($file, 0, -3);
+        $entry->link = $this->router->generate('blog_entry', ['blog_entry' => $entry->slug]);
         $this->processFileProperties($entry);
         if (null === $entry->created) {
             $entry->created = new \DateTime(sprintf('@%d', filectime($path)));
+            $entry->date = $entry->created->format('d.m.y');
+            $entry->time = $entry->created->format('H:i');
         }
         if (!$entry->title) {
             $entry->title = $entry->slug;
@@ -105,6 +111,8 @@ class BlogComponent
                 switch ($key_value['key']) {
                     case 'dateCreated':
                         $entry->created = new \DateTime($key_value['value']);
+                        $entry->date = $entry->created->format('d.m.y');
+                        $entry->time = $entry->created->format('H:i');
                         break;
                     case 'title':
                         $entry->title = $key_value['value'];

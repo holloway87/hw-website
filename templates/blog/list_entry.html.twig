@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="blog-page">
+    <twig:PageHeader title="Blog" class="text-center" />
+    <div class="sm:max-w-2xl sm:mx-auto mb-10">
+        <twig:BlogEntry
+            content="{{ blog_entry.content }}"
+            date="{{ blog_entry.date }}"
+            link="{{ blog_entry.link }}"
+            time="{{ blog_entry.time }}"
+            title="{{ blog_entry.title }}"
+        />
+        {% if html_meta.back_url %}
+            <twig:WidgetContainer>
+                <div class="text-center">
+                    <twig:ButtonBack url="{{ html_meta.back_url }}" />
+                </div>
+            </twig:WidgetContainer>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

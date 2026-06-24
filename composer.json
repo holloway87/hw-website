@@ -24,6 +24,7 @@
         "symfony/security-bundle": "*",
         "symfony/stopwatch": "*",
         "symfony/twig-bundle": "*",
+        "symfony/ux-twig-component": "^3.2",
         "symfony/validator": "*",
         "symfony/var-dumper": "*",
         "symfony/webpack-encore-bundle": "^2.1",

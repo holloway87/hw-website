@@ -1,0 +1,4 @@
+{% props url %}
+<a href="{{ url }}" class="underline decoration-dashed underline-offset-4 hover:no-underline cursor-pointer" {{ attributes.only('target', 'rel') }}>
+    {% block content %}{% endblock %}
+</a>

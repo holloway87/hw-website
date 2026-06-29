@@ -13,7 +13,7 @@
     </head>
     <body class="bg-background">
         <div class="sticky top-0 left-0 right-0 bg-widget shadow-md shadow-gray-900/65 h-9 z-20 mb-5">
-            <div class="container mx-auto lg:max-w-[1140px]">
+            <twig:BaseContainer>
                 <div class="flex flex-row items-center">
                     <a href="/" class="inline-block text-text text-xl leading-9 ml-4">hw-web</a>
                     <div class="grow">
@@ -32,10 +32,11 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </twig:BaseContainer>
         </div>
-        <div class="container mx-auto px-4 lg:max-w-[1140px]">
-            {% block body %}{% endblock %}
-        </div>
+        <twig:BaseContainer class="px-4">
+            {{ block(outerBlocks.body) }}
+        </twig:BaseContainer>
+        {% include 'elements/footer.html.twig' %}
     </body>
 </html>

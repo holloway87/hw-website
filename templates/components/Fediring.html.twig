@@ -1,0 +1,24 @@
+<p class="text-text mb-2">
+    Have a look at other cool websites from the
+    {% apply spaceless %}
+        <twig:TextLink url="https://fediring.net" target="_blank">Fediring</twig:TextLink>
+        <span>:</span>
+    {% endapply %}
+</p>
+<ul class="flex gap-2 mb-4">
+    <li>
+        <twig:ButtonLink url="https://fediring.net/previous?host=holloway-web.de" title="Previous">
+            <twig:Heroicons:ChevronLeft class="h-6 inline-block align-bottom" />
+        </twig:ButtonLink>
+    </li>
+    <li>
+        <twig:ButtonLink url="https://fediring.net/random" title="Random">
+            <twig:LucideIcons:Dices class="h-6 inline-block align-bottom" />
+        </twig:ButtonLink>
+    </li>
+    <li>
+        <twig:ButtonLink url="https://fediring.net/next?host=holloway-web.de" title="Next">
+            <twig:Heroicons:ChevronRight class="h-6 inline-block align-bottom" />
+        </twig:ButtonLink>
+    </li>
+</ul>

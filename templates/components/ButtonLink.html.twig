@@ -1,3 +1,3 @@
-<a href="{{ url }}" class="{{ computed.classes }}">
+<a href="{{ url }}" class="{{ computed.classes }}" {{ attributes.only('target', 'rel', 'title') }}>
     {% block content %}{% endblock %}
 </a>

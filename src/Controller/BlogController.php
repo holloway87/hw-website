@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Component\BlogComponent;
 use App\Component\HtmlMeta;
 use App\Entity\BlogEntry;
 use App\Entity\BlogListRequest;
@@ -63,6 +64,29 @@ class BlogController extends AbstractController
         return $this->json([
             'success' => false,
             'error' => 'no data submitted'
+        ]);
+    }
+
+    /**
+     * View to list all blog entries.
+     *
+     * @param BlogComponent $blog
+     * @param HtmlMeta $html_meta
+     * @return Response
+     */
+    #[Route('/blog', name: 'blog_list')]
+    public function listEntries(
+        BlogComponent $blog,
+        HtmlMeta $html_meta,
+    ): Response {
+        $request = new BlogListRequest;
+        $blog->listEntries($request);
+
+        $html_meta->back_url = $this->generateUrl('frontend_home');
+        $html_meta->title = 'Blog - hw-web';
+
+        return $this->render('blog/list_entries.html.twig', [
+            'entries' => $request->entries,
         ]);
     }
 

@@ -20,7 +20,6 @@ class FrontendController extends AbstractController
      */
     #[Route('/', name: 'frontend_home')]
     #[Route('/admin-login', name: 'frontend_admin_login')]
-    #[Route('/blog', name: 'frontend_blog')]
     #[Route('/illustrations', name: 'frontend_art')]
     #[Route('/illustrations/the-life-of-abe', name: 'frontend_art_the_life_of_abe')]
     #[Route('/dev', name: 'frontend_programming')]

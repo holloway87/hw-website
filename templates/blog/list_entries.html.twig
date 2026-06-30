@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="blog-page">
+    <twig:PageHeader title="Blog" class="text-center" />
+    <twig:SmallContainer>
+        {% for blog_entry in entries %}
+            <twig:BlogEntry
+                content="{{ blog_entry.content }}"
+                date="{{ blog_entry.date }}"
+                link="{{ blog_entry.link }}"
+                time="{{ blog_entry.time }}"
+                title="{{ blog_entry.title }}"
+            />
+        {% endfor %}
+        {% include 'elements/container_back_button.html.twig' %}
+    </twig:SmallContainer>
+</div>
+{% endblock %}

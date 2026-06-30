@@ -3,7 +3,7 @@
 {% block body %}
 <div class="blog-page">
     <twig:PageHeader title="Blog" class="text-center" />
-    <div class="sm:max-w-2xl sm:mx-auto mb-10">
+    <twig:SmallContainer>
         <twig:BlogEntry
             content="{{ blog_entry.content }}"
             date="{{ blog_entry.date }}"
@@ -12,6 +12,6 @@
             title="{{ blog_entry.title }}"
         />
         {% include 'elements/container_back_button.html.twig' %}
-    </div>
+    </twig:SmallContainer>
 </div>
 {% endblock %}

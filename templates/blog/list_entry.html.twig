@@ -11,13 +11,7 @@
             time="{{ blog_entry.time }}"
             title="{{ blog_entry.title }}"
         />
-        {% if html_meta.back_url %}
-            <twig:WidgetContainer>
-                <div class="text-center">
-                    <twig:ButtonBack url="{{ html_meta.back_url }}" />
-                </div>
-            </twig:WidgetContainer>
-        {% endif %}
+        {% include 'elements/container_back_button.html.twig' %}
     </div>
 </div>
 {% endblock %}

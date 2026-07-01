@@ -20,6 +20,11 @@ class TimelineEntry
     private ?\DateTime $date = null;
 
     /**
+     * Date as a string.
+     */
+    public string $date_label = '';
+
+    /**
      * Timeline ID.
      */
     private ?string $id = null;
@@ -30,6 +35,16 @@ class TimelineEntry
      * @var TimelineEntryImage[]
      */
     private array $images = [];
+
+    /**
+     * Link to the timeline entry.
+     */
+    public string $link = '';
+
+    /**
+     * Time portion of the date as a string.
+     */
+    public string $time_label = '';
 
     /**
      * Title.

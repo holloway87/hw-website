@@ -1,4 +1,4 @@
-{% props date, link, time, title %}
+{% props date, images = [], link, time, title = '' %}
 <div class="sm:flex sm:max-w-full sm:mx-auto mb-5">
     <div class="sm:flex-none">
         <a
@@ -26,6 +26,9 @@
             <div class="text-text mb-3">
                 {% block content %}{% endblock %}
             </div>
+            {% if images %}
+                <twig:PhotoGallery images="{{ images }}" />
+            {% endif %}
         </div>
     </div>
 </div>

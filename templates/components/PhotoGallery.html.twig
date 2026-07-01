@@ -1,0 +1,17 @@
+{% props images %}
+<div class="my-gallery grid grid-cols-1 gap-3 {% if 2 <= images|length %}grid-cols-2{% endif %}">
+    {% for image in images %}
+    <a href="{{ image.url }}" data-pswp-width="{{ image.width }}" data-pswp-height="{{ image.height }}">
+        <img src="{{ image.url }}" alt="" class="rounded-md">
+    </a>
+    {% endfor %}
+</div>
+<script type="module">
+import PhotoSwipeLightbox from '{{ asset('build/photoswipe/photoswipe-lightbox.esm.js') }}';
+const lightbox = new PhotoSwipeLightbox({
+    gallery: '.my-gallery',
+    children: 'a',
+    pswpModule: () => import('{{ asset('build/photoswipe/photoswipe.esm.js') }}'),
+});
+lightbox.init();
+</script>

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% if timeline_entry.images %}
+<link rel="stylesheet" href="{{ asset('build/photoswipe/photoswipe.css') }}">
+{% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="page-timeline-entry">
+    <twig:PageHeader title="Timeline entry" class="text-center" />
+    <twig:SmallContainer>
+        <twig:TimelineEntry
+            date="{{ timeline_entry.date_label }}"
+            images="{{ timeline_entry.images }}"
+            link="{{ timeline_entry.link }}"
+            time="{{ timeline_entry.time_label }}"
+            title="{{ timeline_entry.title }}"
+        >
+            {{ timeline_entry.content }}
+        </twig:TimelineEntry>
+        {% include 'elements/container_back_button.html.twig' %}
+    </twig:SmallContainer>
+</div>
+{% endblock %}

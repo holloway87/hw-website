@@ -65,6 +65,12 @@ Encore
     // enables Sass/SCSS support
     .enableSassLoader()
 
+    .copyFiles({
+        from: './node_modules/photoswipe/dist',
+        pattern: /\.(esm\.js|css)$/,
+        to: 'photoswipe/[path][name].[hash:8].[ext]',
+    })
+
     // postcss for tailwindcss
     .enablePostCssLoader()
 

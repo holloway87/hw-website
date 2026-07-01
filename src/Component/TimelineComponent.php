@@ -5,6 +5,7 @@ namespace App\Component;
 use App\Entity\TimelineEntriesRequest;
 use App\Entity\TimelineEntry;
 use App\Entity\TimelineEntryImage;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Component for timeline entries.
@@ -17,6 +18,15 @@ class TimelineComponent
      * Path to timeline entry files.
      */
     const string TIMELINE_PATH = __DIR__.'/../../data/timeline';
+
+    /**
+     * Set all necessary services.
+     *
+     * @param RouterInterface $router
+     */
+    public function __construct(
+        private readonly RouterInterface $router,
+    ) {}
 
     /**
      * Create a new empty time entry and save it on the filesystem. It returns the id.
@@ -125,6 +135,11 @@ class TimelineComponent
 
                     return $entry_image;
                 }, array_key_exists('images', $data) ? $data['images'] : []));
+            $entry->date_label = $entry->getDate()->format('d.m.y');
+            $entry->time_label = $entry->getDate()->format('H:i');
+            $entry->link = $this->router->generate('timeline_entry', [
+                'timeline_entry' => $entry->getId(),
+            ]);
 
             if (!$request->isIncludeEmpty() && $entry->isEmpty()) {
                 continue;

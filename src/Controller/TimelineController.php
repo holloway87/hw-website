@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Component\HtmlMeta;
 use App\Component\TimelineComponent;
+use App\Entity\OpenGraphData;
 use App\Entity\TimelineEntriesRequest;
+use App\Entity\TimelineEntry;
 use App\Entity\TimelineEntryImage;
 use App\Form\TimelineEntriesType;
 use App\Form\TimelineEntryEditType;
@@ -17,6 +20,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\ValueResolver;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -221,7 +225,7 @@ class TimelineController extends AbstractController
                             'h' => $image->getHeight()
                         ];
                     }, $entry->getImages()),
-                    'link' => $this->generateUrl('frontend_timeline_entry', ['id' => $entry->getId()]),
+                    'link' => $this->generateUrl('timeline_entry', ['timeline_entry' => $entry->getId()]),
                 ];
             }
 
@@ -231,6 +235,39 @@ class TimelineController extends AbstractController
         return $this->json([
             'success' => false,
             'error' => 'no data submitted'
+        ]);
+    }
+
+    /**
+     * View for a timeline entry.
+     *
+     * @param HtmlMeta $html_meta
+     * @param TimelineEntry $timeline_entry
+     * @return Response
+     */
+    #[Route('/timeline/{timeline_entry}', name: 'timeline_entry', requirements: ['timeline_entry' => '\d{8}-\d{4}'])]
+    public function listEntry(
+        HtmlMeta $html_meta,
+        #[ValueResolver('timeline_entry')] TimelineEntry $timeline_entry,
+    ): Response {
+        $title = $timeline_entry->getTitle() ?: $timeline_entry->getDate()->format('d.m.Y H:i');
+        $html_meta->back_url = $this->generateUrl('frontend_timeline');
+        $html_meta->title = 'Timeline - '.$title.' - hw-web';
+        $html_meta->open_graph = new OpenGraphData;
+        $html_meta->open_graph->locale = 'en_US';
+        $html_meta->open_graph->type = 'article';
+        $html_meta->open_graph->title = $title;
+        $html_meta->open_graph->description = $timeline_entry->getContent();
+        $html_meta->open_graph->article_published_time = $timeline_entry->getDate();
+        $html_meta->open_graph->site_name = 'hw-web';
+        $html_meta->open_graph->url = $this->generateUrl(
+            'timeline_entry',
+            ['timeline_entry' => $timeline_entry->getId()],
+            UrlGeneratorInterface::ABSOLUTE_URL,
+        );
+
+        return $this->render('timeline/list_entry.html.twig', [
+            'timeline_entry' => $timeline_entry,
         ]);
     }
 }
